@@ -1,72 +1,56 @@
+import java.util.HashMap;
+import java.util.Set;
 
 public class Room
 {
     private String aDescription;
-    private Room aNorthExit;
-    private Room aSouthExit;
-    private Room aEastExit;
-    private Room aWestExit;
+    private HashMap<String,Room> exits;
 
     /** constructeur naturel
      * 
      */
     public Room(final String pDescription)
-    {
+    {   
         this.aDescription=pDescription;
-    }//Room construteur naturel
-    /**
-     * accesseur
+        exits=new HashMap<String, Room>();
+
+    }//Room 
+    
+    /** accesseur
+     * 
      */
     public String getDescription(){return(this.aDescription);}
-    public String getNorthExit(){return(this.aNorthExit.aDescription);}
-    public String getSouthExit(){return(this.aSouthExit.aDescription);}
-    public String getEastExit() {return(this.aEastExit.aDescription) ;}
-    public String getWesthExit(){return(this.aWestExit.aDescription) ;}
     
-    public Room getExit(String pdirection){
-        if(pdirection.equals("n") || pdirection.equals("north") || pdirection.equals("North"))
-            return this.aNorthExit;
-        if(pdirection.equals("s")||pdirection.equals("south")||pdirection.equals("South"))
-            return this.aSouthExit;
-        if(pdirection.equals("e")||pdirection.equals("east")||pdirection.equals("East"))
-            return this.aEastExit;
-        if(pdirection.equals("w")||pdirection.equals("west")||pdirection.equals("West"))
-            return this.aWestExit;
-        return null;
-    }
-
-    /**
-     * 
+    /** acceseur
+     *
      */
-    public void setExits(final Room pNorthExit, final Room pSouthExit,
-    final Room pEastExit,  final Room pWestExit)
-    {
-        if(pNorthExit!=null)
-            this.aNorthExit=pNorthExit;
-        if(pSouthExit!=null)
-            this.aSouthExit=pSouthExit;
-        if(pEastExit!=null)
-            this.aEastExit=pEastExit;
-        if(pWestExit!=null)
-            this.aWestExit=pWestExit;
-
-    }//setExits
-
-    /**
-     * 
+    public Room getExit(String direction){return(exits.get(direction));}
+ 
+    /** getExitString acceseur des sortie
+     *
      */
     public String getExitString(){
-        String vSTR="";
-        if(getExit("north")!=null)
-            vSTR+= this.aNorthExit.aDescription+" ";
-        if(getExit("south")!=null)
-            vSTR+= this.aSouthExit.aDescription+" ";
-        if(getExit("east")!=null)
-            vSTR+= this.aEastExit.aDescription+" ";
-        if(getExit("west")!=null)
-            vSTR+= this.aWestExit.aDescription;
-        return vSTR;
+        String vReturnString="Exits: ";
+        Set <String> keys= exits.keySet();
+        for(String exit : keys){
+            vReturnString += " " +exit;
+        }
+        return vReturnString;
 
     }//getExitString
+
+    /** setExits cree les sortie dans l'atribut HashMap
+     *
+     */
+    public void setExits(String pDir,Room pNei){
+        exits.put(pDir,pNei);
+    }//setExits
+
+    /** return a lomg description of this room
+     *
+     */
+    public String getLongDescription(){
+        return ("You are " + aDescription+".\n"+getExitString());
+    }
 
 } // Room

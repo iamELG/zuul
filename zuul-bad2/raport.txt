@@ -1,0 +1,12 @@
+EXO 7.11
+la fonction getLongDescrition renvoie un string avec la descrition de la piece et les sortie de cette piece.
+
+EXO 7.14
+la procedure look a ete cree le mot "look" a ete ajouter a la liste des commande, des erreur a l'execution(null pointer) mais resolue en faisant rien!! j'ai passer 20min a trouver le bug et en ecrivant le raport et voulant trouver le (null pointer) l'ereur a disprue =). 
+je devrai faire le raport plus souvant.
+
+EXO 7.15
+la procedure eat a ete cree, le mot "eat" a ete ajouter a la liste des commande.
+
+EXO 7.16
+ajout de la procedure showCommands, certain procedure d'afichage sont devenu des static car ces methode n'avais pas besoin d'etre instancier

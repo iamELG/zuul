@@ -13,7 +13,7 @@ public class Game
         this.aParser=new Parser();
     }//game contructeur naturel
 
-    /**
+    /** creat all room's
      * 
      */
     private void createRooms()
@@ -33,27 +33,44 @@ public class Game
         Room vDiningRoom=       new Room("dining room");
         Room vTreasureRoom=     new Room("treasure room");
         Room vEntranceToTheMine=new Room("entrance to the mine");
+        Room vCrypt=            new Room("the crypt");
         
         //set exits
-        vEntrance.setExits(vOutside, vEmptyRoom, vCoridor,null);
-        vOutside.setExits(null,vEntrance,null,null);
-        vCoridor.setExits(null,null,vDeadEnd,vEntrance);
-        vDeadEnd.setExits(null,null,null,vCoridor);
-        vTavern.setExits(vTavern,vTavern,vEmptyRoom,vTavern);
-        vEmptyRoom.setExits(vEntrance,vDiningRoom,vGuardRoom,vTavern);
-        vGuardRoom.setExits(vArmory,null,null,vEmptyRoom);
-        vArmory.setExits(null,vGuardRoom,null,null);
-        vThrone.setExits(null,vBedRoom,vDiningRoom,null);
-        vBedRoom.setExits(vThrone,null,null,null);
-        vDiningRoom.setExits(vEmptyRoom,vTreasureRoom,vEntranceToTheMine,vThrone);
-        vTreasureRoom.setExits(vDiningRoom,null,null,null);
-        vEntranceToTheMine.setExits(null,null,null,vDiningRoom);
+        vEntrance.setExits("north",vOutside);
+        vEntrance.setExits("south",vEmptyRoom);
+        vEntrance.setExits("east",vCoridor);
+        vOutside.setExits("south",vEntrance);
+        vCoridor.setExits("east",vDeadEnd);
+        vCoridor.setExits("west",vEntrance);
+        vDeadEnd.setExits("west",vCoridor);
+        vTavern.setExits("north",vTavern);
+        vTavern.setExits("south",vTavern);
+        vTavern.setExits("east",vEmptyRoom);
+        vTavern.setExits("west",vTavern);
+        vEmptyRoom.setExits("north",vEntrance);
+        vEmptyRoom.setExits("south",vDiningRoom);
+        vEmptyRoom.setExits("east",vGuardRoom);
+        vEmptyRoom.setExits("west",vTavern);
+        vGuardRoom.setExits("north",vArmory);
+        vGuardRoom.setExits("west",vEmptyRoom);
+        vArmory.setExits("south",vGuardRoom);
+        vThrone.setExits("south",vBedRoom);
+        vThrone.setExits("east",vDiningRoom);
+        vBedRoom.setExits("north",vThrone);
+        vDiningRoom.setExits("north",vEmptyRoom);
+        vDiningRoom.setExits("south",vTreasureRoom);
+        vDiningRoom.setExits("east",vEntranceToTheMine);
+        vDiningRoom.setExits("west",vThrone);
+        vTreasureRoom.setExits("north",vDiningRoom);
+        vTreasureRoom.setExits("down",vCrypt);
+        vCrypt.setExits("up",vTreasureRoom);
+        vEntranceToTheMine.setExits("west",vDiningRoom);
         
         //this current room
         this.aCurrentRoom=vEntrance;
     }//createRooms
 
-    /**change room
+    /** change room
      * 
      */
     private void goRoom(final Command pCommand)
@@ -67,23 +84,6 @@ public class Game
         Room vNextRoom=null;
         String vSecondWord=pCommand.getSecondWord();
         vNextRoom=aCurrentRoom.getExit(vSecondWord);
-        /*
-        switch(vSecondWord){
-            case "n"    :vNextRoom=this.aCurrentRoom.aNorthExit;break;
-            case "north":vNextRoom=this.aCurrentRoom.aNorthExit;break;
-            case "North":vNextRoom=this.aCurrentRoom.aNorthExit;break;
-            case "s"    :vNextRoom=this.aCurrentRoom.aSouthExit;break;
-            case "south":vNextRoom=this.aCurrentRoom.aSouthExit;break;
-            case "South":vNextRoom=this.aCurrentRoom.aSouthExit;break;
-            case "e"    :vNextRoom=this.aCurrentRoom.aEastExit ;break;
-            case "east" :vNextRoom=this.aCurrentRoom.aEastExit ;break;
-            case "East" :vNextRoom=this.aCurrentRoom.aEastExit ;break;
-            case "w"    :vNextRoom=this.aCurrentRoom.aWestExit ;break;
-            case "west" :vNextRoom=this.aCurrentRoom.aWestExit ;break;
-            case "West" :vNextRoom=this.aCurrentRoom.aWestExit ;break;
-            default:      System.out.println("Unknown direction !");return;
-        }
-        */
 
         if(vNextRoom==null){
             System.out.println("There is no door !");
@@ -94,8 +94,8 @@ public class Game
         printLocationInfo();
     }//goRoom
         
-    /**
-     *  end message
+    /** end message
+     *  
      */
     private void printEnd()
     {
@@ -109,38 +109,27 @@ public class Game
     private void printWelcome()
     {
         System.out.println("Welcome to the World of Zuul!\nWorld of Zuul is a new, incredibly boring adventure game.\nType \'help\' if you need help.\n ");        
-        System.out.println("You are"+this.aCurrentRoom.getDescription());
         
         printLocationInfo();
     }//printWelcome
     
-    /**
+    /** printLocationInfo affiche la description de la piece
      * 
      */
     private void printLocationInfo(){
-        
-        System.out.println("you are:"+this.aCurrentRoom.getDescription());        
-        
-        if(this.aCurrentRoom.getExit("north")==null && this.aCurrentRoom.getExit("south")==null && this.aCurrentRoom.getExit("east")==null && this.aCurrentRoom.getExit("west")==null){
-            System.out.print("no exits.... this must be a trap\n");
-            return;
-        }
-        System.out.print("Exits:"+this.aCurrentRoom.getExitString());
-        
-        System.out.print("\n");    
+        System.out.println(aCurrentRoom.getLongDescription());        
     }//printExits
     
-    /**
+    /** printHelp procedur d'affichage d'aide
      * 
      */
-    private void printHelp()
+    private static void printHelp()
     {
-        System.out.println("You are lost. You are alone.\nYou wander around at the university.");
-        
-        System.out.println("\nYour command words are: \ngo quit help\n");
+        System.out.println("Your command words are:"); 
+        Parser.showCommands();
     }//printHelp
     
-    /**
+    /** quit prmet d'afficher un message de fin et de quiter
      * 
      */
     private boolean quit(final Command pCommand)
@@ -152,8 +141,8 @@ public class Game
         return true;
     }//quit
     
-    /**
-     * 
+    /** processCommand permet de traiter une command return true si la
+     *  command est quit sinon return false
      */
     private boolean processCommand(final Command pCommand)
     {
@@ -161,14 +150,30 @@ public class Game
         switch(vCommand){
             case "go"  :goRoom(pCommand); return false;
             case "help":printHelp()     ; return false;
+            case "look":look()          ; return false;
+            case "eat" :eat()           ; return false;
             case "quit":return(quit(pCommand)); 
         }
                
         System.out.println("I don't know what you mean...\n");
         return false;
     }//processCommand
+
+    /**look
+     *
+     */
+    private void look(){
+        System.out.println(aCurrentRoom.getLongDescription());
+    }//look
     
-    /**
+    /**eat
+     *
+     */
+    private void eat(){
+        System.out.println("you ate a cookie");
+    }//eat
+
+    /** play procedure permetant de jouer
      * 
      */
     public void play()
