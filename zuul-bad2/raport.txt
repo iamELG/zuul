@@ -10,3 +10,6 @@ la procedure eat a ete cree, le mot "eat" a ete ajouter a la liste des commande.
 
 EXO 7.16
 ajout de la procedure showCommands, certain procedure d'afichage sont devenu des static car ces methode n'avais pas besoin d'etre instancier
+
+EXO 7.18
+ajout de la methode getCommandListe problem aa la compilation "non static method cannot be referenced from a static context" resolut en creant un objet CommandWord temporair pour pouvoir apeler une methode non static dessu

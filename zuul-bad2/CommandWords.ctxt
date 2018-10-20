@@ -12,5 +12,5 @@ comment3.target=void\ showAll()
 comment3.text=print\ all\ valid\ commands\ to\ System.out\n\ \n
 comment4.params=
 comment4.target=java.lang.String\ getCommandListe()
-comment4.text=\n\ \n
+comment4.text=\ renvoi\ un\ string\ avec\ tout\ les\ commande\ posible\n\ \n
 numComments=5

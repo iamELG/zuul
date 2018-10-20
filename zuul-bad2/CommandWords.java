@@ -50,16 +50,8 @@ public class CommandWords
         }
         System.out.println();
     }//showAll
-    
-    /**
-     * 
-     */
-    /*
-    public void ShowCommand(){
-        commands.showAll();
-    }//ShowCommand
-    */
-    /**
+
+    /** renvoi un string avec tout les commande posible
      * 
      */
     public String getCommandListe(){

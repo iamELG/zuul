@@ -63,11 +63,5 @@ public class Parser
             return new Command( null, null ); 
         }
     } // getCommand()
-
-    /**
-     *
-     */
-    public static void showCommands(){
-        CommandWords.showAll();
-    }
+    
 } // Parser

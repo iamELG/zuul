@@ -123,10 +123,10 @@ public class Game
     /** printHelp procedur d'affichage d'aide
      * 
      */
-    private static void printHelp()
+    private void printHelp()
     {
-        System.out.println("Your command words are:"); 
-        Parser.showCommands();
+        CommandWords vTmp=new CommandWords();
+        System.out.println("Your command words are: " +vTmp.getCommandListe());
     }//printHelp
     
     /** quit prmet d'afficher un message de fin et de quiter
