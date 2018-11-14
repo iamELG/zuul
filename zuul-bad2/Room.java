@@ -1,20 +1,37 @@
 import java.util.HashMap;
 import java.util.Set;
-
+/**
+ * This class is part of "Beewick castle" application. 
+ * "Beewick castle" is a very simple, text based adventure game.  
+ * 
+ * This class is to move move around the map in diferent room.
+ * 
+ * @author  Michael Kolling and David J. Barnes + D.Bureau & Elvin Guilloton
+ * @version 2008.03.30 + 2013.09.15
+ */
 public class Room
 {
     private String aDescription;
     private HashMap<String,Room> exits;
+    private String aImageName;
 
     /** constructeur naturel
      * 
      */
-    public Room(final String pDescription)
+    public Room(final String pDescription, final String pImage)
     {   
         this.aDescription=pDescription;
+        this.aImageName=pImage;
         exits=new HashMap<String, Room>();
 
     }//Room 
+    
+    /** setExits cree les sortie dans l'atribut HashMap
+     *
+     */
+    public void setExits(String pDir,Room pNei){
+        exits.put(pDir,pNei);
+    }//setExits
     
     /** accesseur
      * 
@@ -29,22 +46,13 @@ public class Room
     /** getExitString acceseur des sortie
      *
      */
-    public String getExitString(){
-        String vReturnString="Exits: ";
-        Set <String> keys= exits.keySet();
-        for(String exit : keys){
-            vReturnString += " " +exit;
-        }
-        return vReturnString;
-
+    private String getExitString()
+    {
+        StringBuilder vreturnString = new StringBuilder( "Exits:" );
+        for ( String vS : exits.keySet() )
+            vreturnString.append( " " + vS );
+        return vreturnString.toString();
     }//getExitString
-
-    /** setExits cree les sortie dans l'atribut HashMap
-     *
-     */
-    public void setExits(String pDir,Room pNei){
-        exits.put(pDir,pNei);
-    }//setExits
 
     /** return a lomg description of this room
      *
@@ -53,4 +61,10 @@ public class Room
         return ("You are in the: " + aDescription+".\n"+getExitString());
     }
 
+    /**
+     * Return a string describing the room's image name
+     */
+    public String getImageName(){
+	return aImageName;
+    }//getImageName
 } // Room

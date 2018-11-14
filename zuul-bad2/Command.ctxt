@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=Command
+comment0.text=\n\ This\ class\ is\ part\ of\ "Beewick\ castle"\ application.\ \n\ "Beewick\ castle"\ is\ a\ very\ simple,\ text\ based\ adventure\ game.\ \ \n\ \n\ this\ class\ use\ the\ user\ inpute\ and\ do\ action\ in\ the\ game.\n\n\ @author\ \ Michael\ Kolling\ and\ David\ J.\ Barnes\ +\ D.Bureau\ &\ Elvin\ Guilloton\n\ @version\ 2008.03.30\ +\ 2013.09.15\n
 comment1.params=pCommandWord\ pSecondWord
 comment1.target=Command(java.lang.String,\ java.lang.String)
 comment1.text=\ constructeur\ naturel\ \n\ \n

@@ -1,4 +1,12 @@
-
+/**
+ * This class is part of "Beewick castle" application. 
+ * "Beewick castle" is a very simple, text based adventure game.  
+ * 
+ * this class use the user inpute and do action in the game.
+ *
+ * @author  Michael Kolling and David J. Barnes + D.Bureau & Elvin Guilloton
+ * @version 2008.03.30 + 2013.09.15
+ */
 public class Command
 {
     private String aCommandWord;

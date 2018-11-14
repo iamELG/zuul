@@ -1,11 +1,11 @@
 /**
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
+ * This class is part of "Beewick castle" application. 
+ * "Beewick castle" is a very simple, text based adventure game.  
  * 
  * This class holds an enumeration table of all command words known to the game.
  * It is used to recognise commands as they are typed in.
  *
- * @author  Michael Kolling and David J. Barnes + D.Bureau
+ * @author  Michael Kolling and David J. Barnes + D.Bureau & Elvin Guilloton
  * @version 2008.03.30 + 2013.09.15
  */
 public class CommandWords
@@ -54,12 +54,12 @@ public class CommandWords
     /** renvoi un string avec tout les commande posible
      * 
      */
-    public String getCommandListe(){
+    public String getCommandList(){
         String vCommande="";
         for (String vTmp:this.sValidCommands) {
             vCommande+=vTmp+" ";            
         }
         return vCommande;
-    }//getCommandListe
+    }//getCommandList
 
 } // CommandWords
