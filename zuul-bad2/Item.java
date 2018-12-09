@@ -20,20 +20,28 @@ public class Item
     /**
      * geter
      */
-    public int getWeight(){return(this.aWeight);}
+    public int getWeight(){
+        return(this.aWeight);
+    }
     /**
      * geter
      */
-    public String getDescription(){return(this.aDescription);}
+    public String getDescription(){
+        return(this.aDescription);
+    }
     
     /**
      * seter
      */    
-    public void setWeight(int pWeight){this.aWeight=pWeight;}
+    public void setWeight(int pWeight){
+        this.aWeight=pWeight;
+    }
     /**
      * seter
      */
-    public void setDescription(String pDescription){aDescription=pDescription;}
+    public void setDescription(String pDescription){
+        aDescription=pDescription;
+    }
     
     /**
      * fonction qui renvoi la descricption d'un Item et le poids

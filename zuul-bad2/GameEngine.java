@@ -1,3 +1,5 @@
+
+import java.util.Stack;
 /**
  * This class is part of "Beewick castle" application. 
  * "Beewick castle" is a very simple, text based adventure game.  
@@ -12,6 +14,8 @@ public class GameEngine
     private Parser parser;
     private Room aCurrentRoom;
     private UserInterface gui;
+    private Stack<Room> aStack;
+
 
     /**
      * Constructor for objects of class GameEngine
@@ -19,6 +23,7 @@ public class GameEngine
     public GameEngine()
     {
         parser = new Parser();
+        aStack = new Stack<Room>();
         createRooms();
     }
 
@@ -27,7 +32,6 @@ public class GameEngine
         gui = userInterface;
         printWelcome();
     }
-
 
     /** 
      *  affiche le message de debut
@@ -44,9 +48,8 @@ public class GameEngine
     private void createRooms()
     {
         //all rooms
-        //Room vEntrance=         new Room("main Entrance","./image/main_entrance.jpg");
-        
-        Room vEntrance=         new Room("main Entrance","./Images/main_entrance.jpg",new Item(110,"cube"));
+        //Room vEntrance=         new Room("main Entrance","./Images/main_entrance.jpg",new Item(110,"cube"));
+        Room vEntrance=         new Room("main Entrance","./Images/main_entrance.jpg");
         Room vOutside=          new Room("outside the main entrance","./Images/outside_the_castel.jpg");  
         Room vCoridor=          new Room("coridor","./Images/coridor.jpg");                         
         Room vDeadEnd=          new Room("DeadEnd","./Images/deadend.png");
@@ -91,7 +94,13 @@ public class GameEngine
         vTreasureRoom.setExits("down",vCrypt);
         vCrypt.setExits("up",vTreasureRoom);
         vEntranceToTheMine.setExits("west",vDiningRoom);
- 
+        
+        //initialisation des Item
+        vEntrance.addItem(new Item(110,"cube"));
+        vDeadEnd.addItem(new Item(20,"cape"));
+        vDeadEnd.addItem(new Item(35,"chapeau"));
+        vDeadEnd.addItem(new Item(55,"clef"));
+                
         aCurrentRoom = vEntrance;  // start game outside
     }
 
@@ -116,6 +125,7 @@ public class GameEngine
             case "help":printHelp()     ; break;
             case "look":look()          ; break;
             case "eat" :eat()           ; break;
+            case "back":back()           ; break;
             case "quit":endGame(); break;
         }
     }
@@ -160,6 +170,7 @@ public class GameEngine
         if (nextRoom == null)
             gui.println("There is no door!");
         else {
+            aStack.push(aCurrentRoom);
             aCurrentRoom = nextRoom;
             gui.println(aCurrentRoom.getLongDescription());
             if(aCurrentRoom.getImageName() != null)
@@ -167,6 +178,22 @@ public class GameEngine
         }
     }
 
+    /**
+     * 
+     */
+    private void back(){
+        if(aStack.empty()){
+            gui.println("you are already at the beginning!");
+            gui.println("what did you expect? go back in time?");
+            return;
+        }
+        Room vRoom=aStack.pop();
+        aCurrentRoom = vRoom;
+        gui.println(aCurrentRoom.getLongDescription());
+        if(aCurrentRoom.getImageName() != null)
+            gui.showImage(aCurrentRoom.getImageName());
+    }
+    
     private void endGame()
     {
         gui.println("Thank you for playing.  Good bye.");
@@ -187,4 +214,6 @@ public class GameEngine
         gui.println("you ate a cookie");
     }//eat
 
+
+    
 }

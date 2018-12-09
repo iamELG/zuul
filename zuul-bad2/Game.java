@@ -16,7 +16,7 @@ public class Game{
      */
     public Game(){
         engine = new GameEngine();
-     gui = new UserInterface(engine);
-     engine.setGUI(gui);
+        gui = new UserInterface(engine);
+        engine.setGUI(gui);
     }
 } // Game

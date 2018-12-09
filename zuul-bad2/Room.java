@@ -13,7 +13,6 @@ public class Room
 {
     private String aDescription;
     private HashMap<String,Room> aExits;
-    private HashMap<String,Room> aRoom;
     private String aImageName;
     private HashMap<String,Item> aItem;
 
@@ -25,7 +24,6 @@ public class Room
         this.aDescription=pDescription;
         this.aImageName=pImage;
         aExits=new HashMap<String, Room>();
-        aRoom=new HashMap<String, Room>();
         aItem=new HashMap<String, Item>(); 
         aItem.put(pItem.getDescription(),pItem);
     }//Room 
@@ -38,7 +36,6 @@ public class Room
         this.aDescription=pDescription;
         this.aImageName=pImage;
         aExits=new HashMap<String, Room>();
-        aRoom=new HashMap<String, Room>();
         aItem=new HashMap<String, Item>();
     }//Room 
     
@@ -49,15 +46,26 @@ public class Room
         aExits.put(pDir,pNei);
     }//setExits
     
+    /** addItem ajoute un item dans la hashmap 
+     *
+     */
+    public void addItem(Item pItem){
+        aItem.put(pItem.getDescription(),pItem);
+    }//addItem
+    
     /** accesseur
      * 
      */
-    public String getDescription(){return(this.aDescription);}
+    public String getDescription(){
+        return(this.aDescription);
+    }
     
     /** acceseur
      *
      */
-    public Room getExit(String direction){return(aExits.get(direction));}
+    public Room getExit(String direction){
+        return(aExits.get(direction));
+    }
 
     /** getExitString acceseur des sortie
      *
@@ -73,14 +81,11 @@ public class Room
     /** getExitString acceseur des sortie
      *
      */
-    private String getItemString()
-    {
-        StringBuilder vreturnString = new StringBuilder( "roger voit:" );
+    private String getItemString(){
+        StringBuilder vreturnString = new StringBuilder( "roger voit: " );
         for ( String vS : aItem.keySet()){
-            //System.out.println("1"+aItem);
-            //System.out.println("2"+aItem.get(vS).getDescription());
-            //System.out.println("1"+aItem);
-            vreturnString.append(aItem.get(vS).getDescription() + " " );
+            //vreturnString.append(aItem.get(vS).getDescription() + " " );
+            vreturnString.append(vS+ " " );
         }
         return vreturnString.toString();
     }//getItemString
@@ -90,7 +95,6 @@ public class Room
      *
      */
     public String getLongDescription(){
-        //ELG if pas d'item \n else       
         String vStr="You are in the: " + aDescription+".\n"+getExitString();
         if(aItem.isEmpty())
             return (vStr);
@@ -101,7 +105,7 @@ public class Room
      * Return a string describing the room's image name
      */
     public String getImageName(){
-    return aImageName;
+        return aImageName;
     }//getImageName
     
 } // Room
