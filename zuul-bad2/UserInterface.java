@@ -1,8 +1,19 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
 import java.net.URL;
-import java.awt.image.*;
+import javax.swing.JButton;
+//import java.awt.image.*;
 
 /**
  * This class implements a simple graphical user interface with a text entry
@@ -17,6 +28,7 @@ public class UserInterface implements ActionListener{
     private JTextField aEntryField;
     private JTextArea  aLog;
     private JLabel     aImage;
+    private JButton    aButton;
 
     /**
      * Construct a UserInterface. As a parameter, a Game Engine
@@ -36,6 +48,7 @@ public class UserInterface implements ActionListener{
      */
     public void print( final String pText )
     {
+        //pas d'appelle a .toString()
         this.aLog.append( pText );
         this.aLog.setCaretPosition( this.aLog.getDocument().getLength() );
     } // print(.)
@@ -80,7 +93,9 @@ public class UserInterface implements ActionListener{
     {
         this.aMyFrame = new JFrame( "Beewick" );
         this.aEntryField = new JTextField( 34 );
-
+        //ELG do a button
+        this.aButton=new JButton("mange");
+        
         this.aLog = new JTextArea();
         this.aLog.setEditable( false );
         JScrollPane vListScroller = new JScrollPane( this.aLog );
@@ -94,7 +109,9 @@ public class UserInterface implements ActionListener{
         vPanel.add( this.aImage, BorderLayout.NORTH );
         vPanel.add( vListScroller, BorderLayout.CENTER );
         vPanel.add( this.aEntryField, BorderLayout.SOUTH );
-
+        vPanel.add( this.aButton, BorderLayout.EAST);
+        
+        
         this.aMyFrame.getContentPane().add( vPanel, BorderLayout.CENTER );
 
         // add some event listeners to some components
@@ -102,8 +119,9 @@ public class UserInterface implements ActionListener{
             public void windowClosing(WindowEvent e) { System.exit(0); }
         } );
 
-        this.aEntryField.addActionListener( this );
-
+        this.aEntryField.addActionListener( this ); 
+        this.aButton.addActionListener( this );
+        
         this.aMyFrame.pack();
         this.aMyFrame.setVisible( true );
         this.aEntryField.requestFocus();
@@ -114,8 +132,12 @@ public class UserInterface implements ActionListener{
      */
     public void actionPerformed( final ActionEvent pE ) 
     {
-        // no need to check the type of action at the moment.
-        // there is only one possible action: text entry
+        Object vSource=pE.getSource();
+        if(vSource==aButton){
+            this.aEngine.interpretCommand("eat");
+            //processCommand("eat");
+            return;
+        }
         this.processCommand();
     } // actionPerformed(.)
 

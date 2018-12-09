@@ -1,6 +1,6 @@
 Guilloton Elvin
 
-Votre but trouver le trésor dans le château!
+Votre but trouver le trésor dans le château de Beewick!
 
 pour cela vous devrez rentrer dans le chateau trouver la salle du trésor
 puis prendre le trésor et sortir du chateaux.

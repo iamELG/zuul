@@ -44,21 +44,23 @@ public class GameEngine
     private void createRooms()
     {
         //all rooms
-        Room vEntrance=         new Room("main Entrance","main_entrance.jpg");
-        Room vOutside=          new Room("outside the main entrance","outside_the_castel.jpg");  
-        Room vCoridor=          new Room("coridor","coridor.jpg");                         
-        Room vDeadEnd=          new Room("DeadEnd","deadend.png");
-        Room vTavern=           new Room("tavern","tavern.jpg");
-        Room vEmptyRoom=        new Room("empty room","empty_room.jpg");                            
-        Room vGuardRoom=        new Room("guard room","guard_room.jpg");
-        Room vArmory=           new Room("armory","armoury.jpg");
-        Room vThrone=           new Room("throne","thrones.JPG");
-        Room vBedRoom=          new Room("bed room","royal_bed_room.JPG");
-        Room vDiningRoom=       new Room("dining room","dining_room.jpg");
-        Room vTreasureRoom=     new Room("treasure room","treasur_room.jpg");
-        Room vEntranceToTheMine=new Room("entrance to the mine","mine.jpg");
-        Room vCrypt=            new Room("the crypt","treasur_room.jpg");
+        //Room vEntrance=         new Room("main Entrance","./image/main_entrance.jpg");
         
+        Room vEntrance=         new Room("main Entrance","./Images/main_entrance.jpg",new Item(110,"cube"));
+        Room vOutside=          new Room("outside the main entrance","./Images/outside_the_castel.jpg");  
+        Room vCoridor=          new Room("coridor","./Images/coridor.jpg");                         
+        Room vDeadEnd=          new Room("DeadEnd","./Images/deadend.png");
+        Room vTavern=           new Room("tavern","./Images/tavern.jpg");
+        Room vEmptyRoom=        new Room("empty room","./Images/empty_room.jpg");                            
+        Room vGuardRoom=        new Room("guard room","./Images/guard_room.jpg");
+        Room vArmory=           new Room("armory","./Images/armoury.jpg");
+        Room vThrone=           new Room("throne","./Images/thrones.JPG");
+        Room vBedRoom=          new Room("bed room","./Images/royal_bed_room.JPG");
+        Room vDiningRoom=       new Room("dining room","./Images/dining_room.jpg");
+        Room vTreasureRoom=     new Room("treasure room","./Images/treasur_room.jpg");
+        Room vEntranceToTheMine=new Room("entrance to the mine","./Images/mine.jpg");
+        Room vCrypt=            new Room("the crypt","./Images/treasur_room.jpg");
+      
         // initialise room exits
         vEntrance.setExits("north",vOutside);
         vEntrance.setExits("south",vEmptyRoom);
@@ -89,7 +91,7 @@ public class GameEngine
         vTreasureRoom.setExits("down",vCrypt);
         vCrypt.setExits("up",vTreasureRoom);
         vEntranceToTheMine.setExits("west",vDiningRoom);
-
+ 
         aCurrentRoom = vEntrance;  // start game outside
     }
 
@@ -107,17 +109,14 @@ public class GameEngine
             gui.println("I don't know what you mean...");
             return;
         }
-
-        String commandWord = command.getCommandWord();
-        if (commandWord.equals("help"))
-            printHelp();
-        else if (commandWord.equals("go"))
-            goRoom(command);
-        else if (commandWord.equals("quit")) {
-            if(command.hasSecondWord())
-                gui.println("Quit what?");
-            else
-                endGame();
+        
+        String vCommand = command.getCommandWord();
+        switch(vCommand){
+            case "go"  :goRoom(command); break;
+            case "help":printHelp()     ; break;
+            case "look":look()          ; break;
+            case "eat" :eat()           ; break;
+            case "quit":endGame(); break;
         }
     }
 
@@ -138,7 +137,7 @@ public class GameEngine
      * 
      */
     private void printLocationInfo(){
-        System.out.println(aCurrentRoom.getLongDescription());        
+        gui.println(aCurrentRoom.getLongDescription());
     }//printLocationInfo
 
     /** 
@@ -173,6 +172,7 @@ public class GameEngine
         gui.println("Thank you for playing.  Good bye.");
         gui.enable(false);
     }
+    
     /**look
      *
      */
