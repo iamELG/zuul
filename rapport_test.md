@@ -36,7 +36,7 @@ ajout de la méthode getCommandListe problem aa la compilation "non static metho
 des dificulter a trouver sur internet la classe pour faire des bouton. creation d'un bouton pour manger "eat", il eat posisoner a l'ouest.des warning a l'execution du programe mais la de bug dans le jeu(a ma connaisance)
 
 ###EXO 7.19.2
-Les image carge bien il y a deux fois la mem imge pour les deux crypte. Les images n'ont pas tout la meme taille. donc le GUI change de taille a chaque changement de salle.  
+Les image carge bien il y a deux fois la mem imge pour les deux crypte. Les images n'ont pas tout la meme taille. donc le GUI change de taille a chaque changement de salle. 
 
 ###EXO 7.20
 creation de la classe item, ajout d'un constructeur sans item dans la classe room
@@ -57,7 +57,14 @@ cette exercice n'a pas ete fait.
 la cammande Back a directement ete implementer avec une Stack. la Stack est une pile, comme une pillee d'aciete... o peut en rajouter une au dessu(push), on peut enlever celle du dessu(pop), on peut regarder si il y a des assiete(empty).
 
 ###EXO 7.26.1
-la doc a ete genere mais n'ai pas actuelement en ligne 
+la doc a ete genere et est actuelement en ligne sur mon site:
+https://perso.esiee.fr/~guillote/
+
+###EXO 7.28.1
+creation de la methode test et du fichier test.txt, la methode marche par contre ne pas fair d'appelle recursife avec le fichier text(ie metre test test.txt) je n'ai pas encor trouver commen empecher cette boucle infinie.
+
+###EXO 7.28.2
+ajout des fichier text court.txt et long.txt. le fichier court fait des petit deplacement, le fichier long vas explorer tout les pieces. le fichier test vas aller chercher la clef(pas encor implementer) pui chercher le tresort pour resortir.
 
 
 

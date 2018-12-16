@@ -99,7 +99,7 @@ public class Room
         if(aItem.isEmpty())
             return (vStr);
         return (vStr+"\n"+getItemString());
-    }
+    }//getLongDescription
 
     /**
      * Return a string describing the room's image name

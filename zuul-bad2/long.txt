@@ -1,0 +1,26 @@
+go north
+go south
+go east 
+go east 
+go west 
+go west 
+go south
+go east
+go north
+go south
+go west
+go west
+go east
+go south
+go west
+go south 
+go north
+go east
+go east
+go west
+go south
+go down
+go up
+look
+eat
+quit

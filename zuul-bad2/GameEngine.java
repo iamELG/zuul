@@ -1,4 +1,6 @@
-
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Stack;
 /**
  * This class is part of "Beewick castle" application. 
@@ -27,6 +29,9 @@ public class GameEngine
         createRooms();
     }
 
+    /**
+     * fait un interface
+     */
     public void setGUI(UserInterface userInterface)
     {
         gui = userInterface;
@@ -112,20 +117,21 @@ public class GameEngine
     public void interpretCommand(String commandLine) 
     {
         gui.println(commandLine);
-        Command command = parser.getCommand(commandLine);
+        Command vCommand = parser.getCommand(commandLine);
 
-        if(command.isUnknown()) {
+        if(vCommand.isUnknown()) {
             gui.println("I don't know what you mean...");
             return;
         }
         
-        String vCommand = command.getCommandWord();
-        switch(vCommand){
-            case "go"  :goRoom(command); break;
+        String vCommandSTR = vCommand.getCommandWord();
+        switch(vCommandSTR){
+            case "go"  :goRoom(vCommand); break;
             case "help":printHelp()     ; break;
             case "look":look()          ; break;
             case "eat" :eat()           ; break;
-            case "back":back()           ; break;
+            case "back":back()          ; break;
+            case "test":test(vCommand)  ; break;
             case "quit":endGame(); break;
         }
     }
@@ -154,18 +160,17 @@ public class GameEngine
      * Try to go to one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
      */
-    private void goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
+    private void goRoom(Command pCommand){
+        if(!pCommand.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             gui.println("Go where?");
             return;
         }
 
-        String direction = command.getSecondWord();
+        String vDirection = pCommand.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = aCurrentRoom.getExit(direction);
+        Room nextRoom = aCurrentRoom.getExit(vDirection);
 
         if (nextRoom == null)
             gui.println("There is no door!");
@@ -178,7 +183,7 @@ public class GameEngine
         }
     }
 
-    /**
+    /** permet de retourner dans la room precedente
      * 
      */
     private void back(){
@@ -194,6 +199,9 @@ public class GameEngine
             gui.showImage(aCurrentRoom.getImageName());
     }
     
+    /**
+     * quit le jeux
+     */
     private void endGame()
     {
         gui.println("Thank you for playing.  Good bye.");
@@ -214,6 +222,27 @@ public class GameEngine
         gui.println("you ate a cookie");
     }//eat
 
-
-    
+    /**test
+     * 
+     * 
+     */
+    private void test(Command pCommand){
+        if(!pCommand.hasSecondWord()){
+            gui.println("you didn't specify the file");
+            return;
+        }  
+        Scanner vSc;
+        try { // pour "essayer" les instructions suivantes
+            String pNomFichier= pCommand.getSecondWord();
+            vSc = new Scanner( new File( pNomFichier ) );
+            while ( vSc.hasNextLine() ) {
+                String vLigne = vSc.nextLine();
+                interpretCommand(vLigne);
+                // traitement de la ligne lue
+            } // while
+        } // try
+        catch ( final FileNotFoundException pFNFE ) {
+            gui.println("no such file or directory:"+pCommand.getSecondWord());
+        } // catch
+    }//teste
 }

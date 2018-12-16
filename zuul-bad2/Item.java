@@ -36,6 +36,7 @@ public class Item
     public void setWeight(int pWeight){
         this.aWeight=pWeight;
     }
+    
     /**
      * seter
      */

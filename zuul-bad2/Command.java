@@ -24,8 +24,7 @@ public class Command
     /** accesseurs CommandWord
      * 
      */
-    public String getCommandWord()
-    {
+    public String getCommandWord(){
         return(this.aCommandWord);
     }//getCommandWord
     
@@ -37,16 +36,14 @@ public class Command
         return(this.aSecondWord);
     }//getSecondWord
     
-    /**
+    /** renvoi si il y a un deuxiem mot 
      * 
      */
-    public boolean hasSecondWord()
-    {
+    public boolean hasSecondWord(){
         return(this.aSecondWord!=null);   
-        
     }//hasSecondWord
     
-    /**
+    /** verifi que la commande fait partie des commande connue
      * 
      */
     public boolean isUnknown()
