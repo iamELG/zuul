@@ -25,7 +25,7 @@ public class Room
         this.aImageName=pImage;
         aExits=new HashMap<String, Room>();
         aItem=new HashMap<String, Item>(); 
-        aItem.put(pItem.getDescription(),pItem);
+        aItem.put(pItem.getName(),pItem);
     }//Room 
     
     /** constructeur sans objet
@@ -50,7 +50,7 @@ public class Room
      *
      */
     public void addItem(Item pItem){
-        aItem.put(pItem.getDescription(),pItem);
+        aItem.put(pItem.getName(),pItem);
     }//addItem
     
     /** accesseur
@@ -82,7 +82,7 @@ public class Room
      *
      */
     private String getItemString(){
-        StringBuilder vreturnString = new StringBuilder( "roger voit: " );
+        StringBuilder vreturnString = new StringBuilder( "you see:" );
         for ( String vS : aItem.keySet()){
             //vreturnString.append(aItem.get(vS).getDescription() + " " );
             vreturnString.append(vS+ " " );

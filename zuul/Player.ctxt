@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Player
+comment0.text=\n\ Write\ a\ description\ of\ class\ Player\ here.\n\n\ @author\ elvin\ Guilloton\n
+comment1.params=pMaxWeight
+comment1.target=Player(int)
+comment1.text=\n\ constructeur\ naturel\n
+numComments=2

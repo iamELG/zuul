@@ -8,13 +8,24 @@
 public class Item
 {
     private int aWeight;
+    private String aName;
     private String aDescription;
+    
+    /**
+     * Constructeur d'objets de classe Item
+     */
+    public Item(int pWeight,String pName,String pDescription){
+         aDescription=pDescription;
+         aName=pName;
+         aWeight=pWeight;
+    }//Item
 
     /**
      * Constructeur d'objets de classe Item
      */
     public Item(int pWeight,String pDescription){
          aDescription=pDescription;
+         aName=pDescription;
          aWeight=pWeight;
     }//Item
     /**
@@ -31,6 +42,13 @@ public class Item
     }
     
     /**
+     * geter
+     */
+    public String getName(){
+        return(this.aName);
+    }
+    
+    /**
      * seter
      */    
     public void setWeight(int pWeight){
@@ -43,12 +61,19 @@ public class Item
     public void setDescription(String pDescription){
         aDescription=pDescription;
     }
+
+    /**
+     * seter
+     */
+    public void setName(String pName){
+        aName=pName;
+    }
     
     /**
      * fonction qui renvoi la descricption d'un Item et le poids
      */
     @Override
     public String toString(){
-        return("look at this object! it is a "+aDescription+" and it is "+aWeight+"Kg");
+        return("name:"+aName+"\ndescription:"+aDescription+"\nweight"+aWeight);
     }
 }
