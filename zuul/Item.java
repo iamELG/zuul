@@ -24,16 +24,16 @@ public class Item
      * Constructeur d'objets de classe Item
      */
     public Item(int pWeight,String pDescription){
-         aDescription=pDescription;
-         aName=pDescription;
-         aWeight=pWeight;
+        this(pWeight,pDescription,pDescription);
     }//Item
+    
     /**
      * geter
      */
     public int getWeight(){
         return(this.aWeight);
     }
+    
     /**
      * geter
      */

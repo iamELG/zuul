@@ -17,23 +17,23 @@ public class GameEngine
     private Room aCurrentRoom;
     private UserInterface gui;
     private Stack<Room> aStack;
+    private Player aPlayer;
 
 
     /**
      * Constructor for objects of class GameEngine
      */
-    public GameEngine()
-    {
+    public GameEngine(){
         parser = new Parser();
         aStack = new Stack<Room>();
+        aPlayer= new Player();
         createRooms();
     }
 
     /**
      * fait un interface
      */
-    public void setGUI(UserInterface userInterface)
-    {
+    public void setGUI(UserInterface userInterface){
         gui = userInterface;
         printWelcome();
     }
@@ -50,8 +50,7 @@ public class GameEngine
     /**
      * Create all the rooms and link their exits together.
      */
-    private void createRooms()
-    {
+    private void createRooms(){
         //all rooms
         //Room vEntrance=         new Room("main Entrance","./Images/main_entrance.jpg",new Item(110,"cube"));
         Room vEntrance=         new Room("main Entrance","./Images/main_entrance.jpg");
@@ -101,10 +100,10 @@ public class GameEngine
         vEntranceToTheMine.setExits("west",vDiningRoom);
         
         //initialisation des Item
-        vEntrance.addItem(new Item(110,"cube"));
-        vDeadEnd.addItem(new Item(20,"cape"));
-        vDeadEnd.addItem(new Item(35,"chapeau"));
-        vDeadEnd.addItem(new Item(55,"clef"));
+        vEntrance.addItem(new Item(110,"cube","a cube with some color un it"));
+        vDeadEnd.addItem(new Item(20,"cape","a red cape"));
+        vDeadEnd.addItem(new Item(35,"hat"," a cowboy hat"));
+        vDeadEnd.addItem(new Item(55,"key","an old and rusty key"));
                 
         aCurrentRoom = vEntrance;  // start game outside
     }
@@ -114,8 +113,7 @@ public class GameEngine
      * If this command ends the game, true is returned, otherwise false is
      * returned.
      */
-    public void interpretCommand(String commandLine) 
-    {
+    public void interpretCommand(String commandLine){
         gui.println(commandLine);
         Command vCommand = parser.getCommand(commandLine);
 
@@ -132,6 +130,8 @@ public class GameEngine
             case "eat" :eat()           ; break;
             case "back":back()          ; break;
             case "test":test(vCommand)  ; break;
+            case "take":take(vCommand)  ; break;
+            case "drop":drop(vCommand)  ; break;
             case "quit":endGame(); break;
         }
     }
@@ -143,8 +143,7 @@ public class GameEngine
      * Here we print some stupid, cryptic message and a list of the 
      * command words.
      */
-    private void printHelp() 
-    {
+    private void printHelp() {
         gui.println("You are lost in Beewick castle?\nYou are alone. You wander");
         gui.print("Your command words are: " + parser.showCommands());
     }
@@ -245,4 +244,42 @@ public class GameEngine
             gui.println("no such file or directory:"+pCommand.getSecondWord());
         } // catch
     }//teste
+    /**
+     *  take
+     */
+    private void take(Command pCommand){
+        if(!pCommand.hasSecondWord()) {
+            gui.println("which object do you want too take?");
+            return;
+        }
+        String vName = pCommand.getSecondWord();
+        if(!aCurrentRoom.itemInRoom(vName)){
+            aPlayer.addItem(aCurrentRoom.getItem(vName));
+            aCurrentRoom.removeItem(vName);
+            look();
+            return;
+        }
+        gui.println("this item is not in the room!");
+        look();
+    }//take
+    
+    
+    /**
+     *  drop
+     */
+    private void drop(Command pCommand){
+        if(!pCommand.hasSecondWord()) {
+            gui.println("which object do you want too drop?");
+            return;
+        }
+        String vName = pCommand.getSecondWord();
+        if(!aPlayer.itemInInventory(vName)){
+            aCurrentRoom.addItem(aPlayer.getItem(vName));
+            aPlayer.removeItem(vName);
+            look();
+            return;
+        }
+        gui.println("this item is not in your inventory");
+        look();
+    }//drop
 }

@@ -50,8 +50,6 @@ ajout d'une hashmap pour metre plusieur item dans une room. ajout de addItem() p
 ###EXO 7.22.2
 ajout ditem dans la salle de d'epart et dans la sale dead-end il y a 3 items. pour l'nstant seul un seul a une utiliter dans le senario(la clef)
 
-###EXO 7.23
-cette exercice n'a pas ete fait.
 
 ###EXO 7.26
 la cammande Back a directement ete implementer avec une Stack. la Stack est une pile, comme une pillee d'aciete... o peut en rajouter une au dessu(push), on peut enlever celle du dessu(pop), on peut regarder si il y a des assiete(empty).
@@ -65,6 +63,14 @@ creation de la methode test et du fichier test.txt, la methode marche par contre
 
 ###EXO 7.28.2
 ajout des fichier text court.txt et long.txt. le fichier court fait des petit deplacement, le fichier long vas explorer tout les pieces. le fichier test vas aller chercher la clef(pas encor implementer) pui chercher le tresort pour resortir.
+
+###EXO 7.29
+ajout de la latribut aName pour la classe item, un Item a maintenant u nom et une description. ajout de la classe Player.
+
+###EXO 7.30
+ajout des deux action take et drop dans la classe GameEngine.
+pas encor de commande pour voir sont inventair.
+
 
 
 

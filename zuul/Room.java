@@ -53,18 +53,45 @@ public class Room
         aItem.put(pItem.getName(),pItem);
     }//addItem
     
+    /**  
+     * removeItem enleve un Item dans la hashmap
+     */
+    public void removeItem(String pStr){
+        if(aItem.containsKey(pStr))
+            return;
+        aItem.remove(pStr);
+        return;
+    }//removeItem
+    
+    /**  
+     * itemInRoom renvoi si un item est dans la Room
+     */
+    public boolean itemInRoom(String pStr){
+        if(aItem.containsKey(pStr))
+            return false;
+        return true;
+    }//itemInRoom
+    
+    
     /** accesseur
      * 
      */
     public String getDescription(){
         return(this.aDescription);
-    }
+    }//getDescription
     
     /** acceseur
      *
      */
     public Room getExit(String direction){
         return(aExits.get(direction));
+    }//getExit
+    
+    /** accesseur
+     * 
+     */
+    public Item getItem(String pName){
+        return(aItem.get(pName));
     }
 
     /** getExitString acceseur des sortie
