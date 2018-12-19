@@ -1,11 +1,10 @@
-import java.util.HashMap;
 /**
  * Write a description of class Player here.
  *
  * @author Elvin Guilloton
  */
 public class Player{
-    private HashMap<String,Item> aInventory;
+    private ItemList aInventory;
     int aMaxWeight;
     int aCurrentWeight;
     
@@ -13,7 +12,7 @@ public class Player{
      * constructeur naturel 
      */
     public Player(int pMaxWeight,int pCurrentWeight){
-        aInventory=new HashMap<String, Item>();
+        aInventory=new ItemList();
         aMaxWeight=pMaxWeight;
         aCurrentWeight=pCurrentWeight;
     }//Player
@@ -39,11 +38,11 @@ public class Player{
         return aCurrentWeight;
     }//getCurrentWeight
     
-    /** accesseur
+    /**geter
      * 
      */
-    public Item getItem(String pName){
-        return(aInventory.get(pName));
+    public ItemList getItem(){
+        return aInventory;
     }
     
     /**
@@ -59,30 +58,5 @@ public class Player{
     public void setCurrentWeight(int pCurrentWeight){
        aCurrentWeight=pCurrentWeight;
     }//setCurrentWeight
-    
-    /**  
-     * addItem ajoute un item dans la hashmap
-     */
-    public void addItem(Item pItem){
-       aInventory.put(pItem.getName(),pItem);
-    }//addItem
-    
-    /**  
-     * removeItem enleve un item dans la hashmap
-     */
-    public void removeItem(String pStr){
-        if(aInventory.containsKey(pStr))
-            return;
-        aInventory.remove(pStr);
-    }//removeItem
-    
-    /**  
-     * itemInInventory renvoi si un item est dans l'inventair
-     */
-    public boolean itemInInventory(String pStr){
-        if(aInventory.containsKey(pStr))
-            return false;
-        return true;
-    }//itemInRoom
     
 }//Player

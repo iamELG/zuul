@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.HashMap;
 import java.util.Set;
 /**
  * This class is part of "Beewick castle" application. 
@@ -14,7 +15,7 @@ public class Room
     private String aDescription;
     private HashMap<String,Room> aExits;
     private String aImageName;
-    private HashMap<String,Item> aItem;
+    private ItemList aItem;
 
     /** constructeur naturel
      * 
@@ -24,8 +25,8 @@ public class Room
         this.aDescription=pDescription;
         this.aImageName=pImage;
         aExits=new HashMap<String, Room>();
-        aItem=new HashMap<String, Item>(); 
-        aItem.put(pItem.getName(),pItem);
+        aItem=new ItemList(); 
+        aItem.addItem(pItem);
     }//Room 
     
     /** constructeur sans objet
@@ -36,7 +37,7 @@ public class Room
         this.aDescription=pDescription;
         this.aImageName=pImage;
         aExits=new HashMap<String, Room>();
-        aItem=new HashMap<String, Item>();
+        aItem=new ItemList();
     }//Room 
     
     /** setExits cree les sortie dans l'atribut HashMap
@@ -45,34 +46,7 @@ public class Room
     public void setExits(String pDir,Room pNei){
         aExits.put(pDir,pNei);
     }//setExits
-    
-    /** addItem ajoute un item dans la hashmap 
-     *
-     */
-    public void addItem(Item pItem){
-        aItem.put(pItem.getName(),pItem);
-    }//addItem
-    
-    /**  
-     * removeItem enleve un Item dans la hashmap
-     */
-    public void removeItem(String pStr){
-        if(aItem.containsKey(pStr))
-            return;
-        aItem.remove(pStr);
-        return;
-    }//removeItem
-    
-    /**  
-     * itemInRoom renvoi si un item est dans la Room
-     */
-    public boolean itemInRoom(String pStr){
-        if(aItem.containsKey(pStr))
-            return false;
-        return true;
-    }//itemInRoom
-    
-    
+   
     /** accesseur
      * 
      */
@@ -87,13 +61,13 @@ public class Room
         return(aExits.get(direction));
     }//getExit
     
-    /** accesseur
+    /**geter
      * 
      */
-    public Item getItem(String pName){
-        return(aItem.get(pName));
+    public ItemList getItem(){
+        return aItem;
     }
-
+    
     /** getExitString acceseur des sortie
      *
      */
@@ -105,27 +79,16 @@ public class Room
         return vreturnString.toString();
     }//getExitString
     
-    /** getExitString acceseur des sortie
-     *
-     */
-    private String getItemString(){
-        StringBuilder vreturnString = new StringBuilder( "you see:" );
-        for ( String vS : aItem.keySet()){
-            //vreturnString.append(aItem.get(vS).getDescription() + " " );
-            vreturnString.append(vS+ " " );
-        }
-        return vreturnString.toString();
-    }//getItemString
-
-
     /** return a lomg description of this room
      *
      */
     public String getLongDescription(){
         String vStr="You are in the: " + aDescription+".\n"+getExitString();
+        
         if(aItem.isEmpty())
             return (vStr);
-        return (vStr+"\n"+getItemString());
+           
+        return (vStr+"\n"+aItem.getItemString());
     }//getLongDescription
 
     /**

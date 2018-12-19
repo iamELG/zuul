@@ -100,10 +100,10 @@ public class GameEngine
         vEntranceToTheMine.setExits("west",vDiningRoom);
         
         //initialisation des Item
-        vEntrance.addItem(new Item(110,"cube","a cube with some color un it"));
-        vDeadEnd.addItem(new Item(20,"cape","a red cape"));
-        vDeadEnd.addItem(new Item(35,"hat"," a cowboy hat"));
-        vDeadEnd.addItem(new Item(55,"key","an old and rusty key"));
+        vEntrance.getItem().addItem(new Item(110,"cube","a cube with some color un it"));
+        vDeadEnd.getItem().addItem(new Item(20,"cape","a red cape"));
+        vDeadEnd.getItem().addItem(new Item(35,"hat"," a cowboy hat"));
+        vDeadEnd.getItem().addItem(new Item(55,"key","an old and rusty key"));
                 
         aCurrentRoom = vEntrance;  // start game outside
     }
@@ -253,9 +253,10 @@ public class GameEngine
             return;
         }
         String vName = pCommand.getSecondWord();
-        if(!aCurrentRoom.itemInRoom(vName)){
-            aPlayer.addItem(aCurrentRoom.getItem(vName));
-            aCurrentRoom.removeItem(vName);
+        
+        if(!aCurrentRoom.getItem().itemInList(vName)){
+            aPlayer.getItem().addItem(aCurrentRoom.getItem().getItem(vName));
+            aCurrentRoom.getItem().removeItem(vName);
             look();
             return;
         }
@@ -273,9 +274,9 @@ public class GameEngine
             return;
         }
         String vName = pCommand.getSecondWord();
-        if(!aPlayer.itemInInventory(vName)){
-            aCurrentRoom.addItem(aPlayer.getItem(vName));
-            aPlayer.removeItem(vName);
+        if(!aPlayer.getItem().itemInList(vName)){
+            aCurrentRoom.getItem().addItem(aPlayer.getItem().getItem(vName));
+            aPlayer.getItem().removeItem(vName);
             look();
             return;
         }
