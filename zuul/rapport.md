@@ -73,4 +73,10 @@ La class Player a directement été implémenté avec une Hashmap d'Item; donc i
 
 ###EXO 7.31.1
 Ajout de la class ItemList.
+----------------
+###EXO 7.32
+les methode take et drop on ete modifier pour que les regle de poi soi respecter, currentweight < maxweight.
+
+###EXO 7.33
+ajout de la methode items pour voir sont inventaire 
 

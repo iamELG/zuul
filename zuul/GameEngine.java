@@ -100,10 +100,11 @@ public class GameEngine
         vEntranceToTheMine.setExits("west",vDiningRoom);
         
         //initialisation des Item
-        vEntrance.getItem().addItem(new Item(110,"cube","a cube with some color un it"));
-        vDeadEnd.getItem().addItem(new Item(20,"cape","a red cape"));
-        vDeadEnd.getItem().addItem(new Item(35,"hat"," a cowboy hat"));
-        vDeadEnd.getItem().addItem(new Item(55,"key","an old and rusty key"));
+        vEntrance.getItemList().addItem(new Item(110,"cube","a cube with some color un it"));
+        vDeadEnd.getItemList().addItem(new Item(20,"cape","a red cape"));
+        vDeadEnd.getItemList().addItem(new Item(35,"hat"," a cowboy hat"));
+        vDeadEnd.getItemList().addItem(new Item(55,"key","an old and rusty key"));
+        vDeadEnd.getItemList().addItem(new Item(5500,"heavy","realy heavy"));
                 
         aCurrentRoom = vEntrance;  // start game outside
     }
@@ -114,9 +115,9 @@ public class GameEngine
      * returned.
      */
     public void interpretCommand(String commandLine){
-        gui.println(commandLine);
+        gui.println("\n"+commandLine);
         Command vCommand = parser.getCommand(commandLine);
-
+        
         if(vCommand.isUnknown()) {
             gui.println("I don't know what you mean...");
             return;
@@ -129,10 +130,11 @@ public class GameEngine
             case "look":look()          ; break;
             case "eat" :eat()           ; break;
             case "back":back()          ; break;
+            case "items":items()        ; break;
             case "test":test(vCommand)  ; break;
             case "take":take(vCommand)  ; break;
             case "drop":drop(vCommand)  ; break;
-            case "quit":endGame(); break;
+            case "quit":endGame()       ; break;
         }
     }
 
@@ -254,16 +256,22 @@ public class GameEngine
         }
         String vName = pCommand.getSecondWord();
         
-        if(!aCurrentRoom.getItem().itemInList(vName)){
-            aPlayer.getItem().addItem(aCurrentRoom.getItem().getItem(vName));
-            aCurrentRoom.getItem().removeItem(vName);
-            look();
+        if(aCurrentRoom.getItemList().itemInList(vName)){
+            gui.println("this item is not in the room!");
+            look();   
             return;
         }
-        gui.println("this item is not in the room!");
-        look();
+        
+        if(aPlayer.getCurrentWeight()+aCurrentRoom.getItemList().getItem(vName).getWeight() > aPlayer.getMaxWeight()){
+            gui.println("this item is too heavy for you!");
+            look();   
+            return;
+        }
+        aPlayer.setCurrentWeight( aPlayer.getCurrentWeight() + aCurrentRoom.getItemList().getItem(vName).getWeight() );
+        aPlayer.getInventory().addItem(aCurrentRoom.getItemList().getItem(vName));
+        aCurrentRoom.getItemList().removeItem(vName);
+        look();    
     }//take
-    
     
     /**
      *  drop
@@ -274,13 +282,27 @@ public class GameEngine
             return;
         }
         String vName = pCommand.getSecondWord();
-        if(!aPlayer.getItem().itemInList(vName)){
-            aCurrentRoom.getItem().addItem(aPlayer.getItem().getItem(vName));
-            aPlayer.getItem().removeItem(vName);
+        if(aPlayer.getInventory().itemInList(vName)){
+            gui.println("this item is not in your inventory");
             look();
             return;
         }
-        gui.println("this item is not in your inventory");
+        aPlayer.setCurrentWeight( aPlayer.getCurrentWeight() - aPlayer.getInventory().getItem(vName).getWeight());
+        aCurrentRoom.getItemList().addItem(aPlayer.getInventory().getItem(vName));
+        aPlayer.getInventory().removeItem(vName);
         look();
     }//drop
+    
+    /**
+     * items
+     */
+    private void items(){
+        if(aPlayer.getInventory().isEmpty()){
+            gui.println("no Item in you bag");
+            return;        
+        }
+            
+        gui.println("Inventory: "+ aPlayer.getInventory().getItemString());
+        
+    }
 }

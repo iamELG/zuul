@@ -64,7 +64,7 @@ public class Room
     /**geter
      * 
      */
-    public ItemList getItem(){
+    public ItemList getItemList(){
         return aItem;
     }
     
@@ -88,7 +88,7 @@ public class Room
         if(aItem.isEmpty())
             return (vStr);
            
-        return (vStr+"\n"+aItem.getItemString());
+        return (vStr+"\nItem:"+aItem.getItemString());
     }//getLongDescription
 
     /**

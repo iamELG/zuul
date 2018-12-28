@@ -21,7 +21,7 @@ public class Player{
      * constructeur par default 
      */
     public Player(){
-        this(1500,0);
+        this(500,0);
     }//Player
     
     /**
@@ -41,7 +41,7 @@ public class Player{
     /**geter
      * 
      */
-    public ItemList getItem(){
+    public ItemList getInventory(){
         return aInventory;
     }
     
