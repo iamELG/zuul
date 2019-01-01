@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Item
 comment0.text=\n\ D\u00E9crivez\ votre\ classe\ Item\ ici.\n\n\ @author\ Guilloton\ Elvin\n\ @version\ 1.0\n
-comment1.params=pWeight\ pName\ pDescription
-comment1.target=Item(int,\ java.lang.String,\ java.lang.String)
+comment1.params=pWeight\ pName\ pDescription\ pEdible
+comment1.target=Item(int,\ java.lang.String,\ java.lang.String,\ boolean)
 comment1.text=\n\ Constructeur\ d'objets\ de\ classe\ Item\n
 comment2.params=pWeight\ pDescription
 comment2.target=Item(int,\ java.lang.String)

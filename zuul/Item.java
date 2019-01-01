@@ -10,21 +10,23 @@ public class Item
     private int aWeight;
     private String aName;
     private String aDescription;
+    private boolean aEdible;
     
     /**
      * Constructeur d'objets de classe Item
      */
-    public Item(int pWeight,String pName,String pDescription){
+    public Item(int pWeight,String pName,String pDescription,boolean pEdible){
          aDescription=pDescription;
          aName=pName;
          aWeight=pWeight;
+         aEdible=pEdible;
     }//Item
 
     /**
      * Constructeur d'objets de classe Item
      */
     public Item(int pWeight,String pDescription){
-        this(pWeight,pDescription,pDescription);
+        this(pWeight,pDescription,pDescription,false);
     }//Item
     
     /**
@@ -46,6 +48,13 @@ public class Item
      */
     public String getName(){
         return(this.aName);
+    }
+    
+    /**
+     * geter
+     */
+    public boolean getEdible(){
+        return(this.aEdible);
     }
     
     /**

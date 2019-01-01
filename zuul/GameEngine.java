@@ -100,12 +100,13 @@ public class GameEngine
         vEntranceToTheMine.setExits("west",vDiningRoom);
         
         //initialisation des Item
-        vEntrance.getItemList().addItem(new Item(110,"cube","a cube with some color un it"));
-        vDeadEnd.getItemList().addItem(new Item(20,"cape","a red cape"));
-        vDeadEnd.getItemList().addItem(new Item(35,"hat"," a cowboy hat"));
-        vDeadEnd.getItemList().addItem(new Item(55,"key","an old and rusty key"));
-        vDeadEnd.getItemList().addItem(new Item(5500,"heavy","realy heavy"));
-                
+        vEntrance.getItemList().addItem(new Item(110,"cube","a cube with some color on it",false));
+        vDeadEnd.getItemList().addItem(new Item(20,"cape","a red cape",false));
+        vDeadEnd.getItemList().addItem(new Item(35,"hat"," a cowboy hat",false));
+        vDeadEnd.getItemList().addItem(new Item(55,"key","an old and rusty key",false));
+        vDeadEnd.getItemList().addItem(new Item(5500,"heavy","realy heavy",false));
+        vTavern.getItemList().addItem(new Item(20,"cookie","chocolate cookie",false));
+        
         aCurrentRoom = vEntrance;  // start game outside
     }
 
@@ -126,14 +127,14 @@ public class GameEngine
         String vCommandSTR = vCommand.getCommandWord();
         switch(vCommandSTR){
             case "go"  :goRoom(vCommand); break;
-            case "help":printHelp()     ; break;
-            case "look":look()          ; break;
-            case "eat" :eat()           ; break;
-            case "back":back()          ; break;
-            case "items":items()        ; break;
+            case "eat" :eat(vCommand)   ; break;
             case "test":test(vCommand)  ; break;
             case "take":take(vCommand)  ; break;
             case "drop":drop(vCommand)  ; break;
+            case "help":printHelp()     ; break;
+            case "look":look()          ; break;
+            case "back":back()          ; break;
+            case "items":items()        ; break;
             case "quit":endGame()       ; break;
         }
     }
@@ -219,8 +220,24 @@ public class GameEngine
     /**eat
      *
      */
-    private void eat(){
-        gui.println("you ate a cookie");
+    private void eat(Command pCommand){
+        if(!pCommand.hasSecondWord()){
+            gui.println("what do you want to eat?");
+            return;
+        }
+        String vName = pCommand.getSecondWord();
+        if(aPlayer.getInventory().itemInList(vName)){
+            gui.println("you dont have any "+vName);
+            return;
+        }
+        if(aPlayer.getInventory().getItem(vName).getEdible()){
+            gui.println("this item is not food, you can't eat it");
+            return;
+        }
+        
+        aPlayer.setMaxWeight(aPlayer.getMaxWeight()*2);
+        aPlayer.getInventory().removeItem(vName);
+        gui.println("you ate a cookie, you can now carry more loot");
     }//eat
 
     /**test

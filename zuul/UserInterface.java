@@ -95,7 +95,7 @@ public class UserInterface implements ActionListener{
         this.aMyFrame = new JFrame( "Beewick" );
         this.aEntryField = new JTextField( 34 );
         
-        this.aButton=new JButton("mange");
+        this.aButton=new JButton("look");
         
         this.aLog = new JTextArea();
         this.aLog.setEditable( false );
@@ -135,7 +135,7 @@ public class UserInterface implements ActionListener{
     {
         Object vSource=pE.getSource();
         if(vSource==aButton){
-            this.aEngine.interpretCommand("eat");
+            this.aEngine.interpretCommand("look");
             return;
         }
         this.processCommand();

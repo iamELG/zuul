@@ -9,6 +9,7 @@
 
 # BlueJ files
 #*.ctxt
+*zuul-with-enums-v1*
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
