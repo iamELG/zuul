@@ -29,7 +29,8 @@ public class UserInterface implements ActionListener{
     private JTextArea  aLog;
     private JLabel     aImage;
     private JButton    aButton;
-
+    private Parser     aParser;
+    
     /**
      * Construct a UserInterface. As a parameter, a Game Engine
      * (an object processing and executing the game commands) is
@@ -39,7 +40,7 @@ public class UserInterface implements ActionListener{
      */
     public UserInterface( final GameEngine pGameEngine )
     {
-        
+        aParser = new Parser();
         this.aEngine = pGameEngine;
         this.createGUI();
     } // UserInterface(.)
@@ -135,7 +136,7 @@ public class UserInterface implements ActionListener{
     {
         Object vSource=pE.getSource();
         if(vSource==aButton){
-            this.aEngine.interpretCommand("look");
+            aParser.getCommand("look");
             return;
         }
         this.processCommand();
@@ -150,6 +151,6 @@ public class UserInterface implements ActionListener{
         String vInput = this.aEntryField.getText();
         this.aEntryField.setText( "" );
 
-        this.aEngine.interpretCommand( vInput );
+        this.aEngine.interpretCommand( aParser.getCommand(vInput) );
     } // processCommand()
 } // UserInterface 

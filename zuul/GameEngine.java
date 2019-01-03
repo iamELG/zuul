@@ -115,27 +115,28 @@ public class GameEngine
      * If this command ends the game, true is returned, otherwise false is
      * returned.
      */
-    public void interpretCommand(String commandLine){
-        gui.println("\n"+commandLine);
-        Command vCommand = parser.getCommand(commandLine);
+    public void interpretCommand(Command pCommand){
         
-        if(vCommand.isUnknown()) {
+        CommandWord vCommandWord = pCommand.getCommandWord();
+        //Command vCommand = parser.getCommand(commandLine);
+        
+        if(vCommandWord== CommandWord.UNKNOWN) {
             gui.println("I don't know what you mean...");
             return;
         }
         
-        String vCommandSTR = vCommand.getCommandWord();
-        switch(vCommandSTR){
-            case "go"  :goRoom(vCommand); break;
-            case "eat" :eat(vCommand)   ; break;
-            case "test":test(vCommand)  ; break;
-            case "take":take(vCommand)  ; break;
-            case "drop":drop(vCommand)  ; break;
-            case "help":printHelp()     ; break;
-            case "look":look()          ; break;
-            case "back":back()          ; break;
-            case "items":items()        ; break;
-            case "quit":endGame()       ; break;
+        //String vCommandSTR = vCommand.getCommandWord();
+        switch(vCommandWord){
+            case GO  :goRoom(pCommand); break;
+            case EAT :eat(pCommand)   ; break;
+            case TEST:test(pCommand)  ; break;
+            case TAKE:take(pCommand)  ; break;
+            case DROP:drop(pCommand)  ; break;
+            case HELP:printHelp()     ; break;
+            case LOOK:look()          ; break;
+            case BACK:back()          ; break;
+            case ITEMS:items()        ; break;
+            case QUIT:endGame()       ; break;
         }
     }
 
@@ -255,7 +256,7 @@ public class GameEngine
             vSc = new Scanner( new File( pNomFichier ) );
             while ( vSc.hasNextLine() ) {
                 String vLigne = vSc.nextLine();
-                interpretCommand(vLigne);
+                interpretCommand(parser.getCommand( vLigne ));
                 // traitement de la ligne lue
             } // while
         } // try

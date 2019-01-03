@@ -33,8 +33,7 @@ public class Parser
      * Get a new command from the user. The command is read by
      * parsing the 'inputLine'.
      */
-    public Command getCommand( final String pInputLine ) 
-    {
+    public Command getCommand( final String pInputLine ) {
         String vWord1;
         String vWord2;
 
@@ -55,10 +54,7 @@ public class Parser
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
 
-        if ( this.aCommandWords.isCommand( vWord1 ) )
-            return new Command( vWord1, vWord2 );
-        else
-            return new Command( null, vWord2 );
+        return new Command(aCommandWords.getCommandWord(vWord1), vWord2);
     } // getCommand(.)
 
     /**

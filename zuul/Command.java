@@ -9,13 +9,13 @@
  */
 public class Command
 {
-    private String aCommandWord;
+    private CommandWord aCommandWord;
     private String aSecondWord;
     
     /** constructeur naturel 
      * 
      */
-    public Command(final String pCommandWord,final String pSecondWord)
+    public Command(final CommandWord pCommandWord,final String pSecondWord)
     {
         this.aCommandWord=pCommandWord;
         this.aSecondWord=pSecondWord;
@@ -24,15 +24,14 @@ public class Command
     /** accesseurs CommandWord
      * 
      */
-    public String getCommandWord(){
+    public CommandWord getCommandWord(){
         return(this.aCommandWord);
     }//getCommandWord
     
     /** accesseurs SecondWord
      * 
      */
-    public String getSecondWord()
-    {
+    public String getSecondWord(){
         return(this.aSecondWord);
     }//getSecondWord
     
@@ -46,9 +45,8 @@ public class Command
     /** verifi que la commande fait partie des commande connue
      * 
      */
-    public boolean isUnknown()
-    {
-        return(this.aCommandWord==null);   
+    public boolean isUnknown(){
+        return (aCommandWord == CommandWord.UNKNOWN);   
     }//isUnknown
     
 } // Command
