@@ -80,3 +80,23 @@ les methode take et drop on ete modifier pour que les regle de poi soi respecter
 ###EXO 7.33
 ajout de la methode items pour voir sont inventaire 
 
+###EXO 7.34
+ajout d'un magic cookie dans le tavern.
+
+###EXO 7.35
+le classe CommandWord a ete cree et est fonctionel.
+
+###EXO 7.41.2
+la java doc a ete mis a jour
+```bash
+javadoc -d userdoc -author -version *.java
+javadoc -d progdoc -author -version -private -linksource *.java
+```
+###EXO 7.42
+ajout d'une mimite de 35 mouvement valide pour finir le jeux
+(7.42.1 optionel temps reel)
+
+###EXO 7.42.2
+ la décision de vous contenter de l'IHM actuelle.
+ si j'arrive a ratraper mon retard peut etre que je ferai un nouvelle interfqce homme machine
+

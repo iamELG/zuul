@@ -18,7 +18,8 @@ public class GameEngine
     private UserInterface gui;
     private Stack<Room> aStack;
     private Player aPlayer;
-
+    private int  aNumberOfMove;
+    private int  aNumberOfMoveMax;
 
     /**
      * Constructor for objects of class GameEngine
@@ -27,6 +28,8 @@ public class GameEngine
         parser = new Parser();
         aStack = new Stack<Room>();
         aPlayer= new Player();
+        aNumberOfMove=0;
+        aNumberOfMove=35;
         createRooms();
     }
 
@@ -149,7 +152,7 @@ public class GameEngine
      */
     private void printHelp() {
         gui.println("You are lost in Beewick castle?\nYou are alone. You wander");
-        gui.print("Your command words are: " + parser.showCommands());
+        gui.println("Your command words are: " + parser.showCommands());
     }
 
     /** printLocationInfo affiche la description de la piece
@@ -185,6 +188,12 @@ public class GameEngine
                 gui.showImage(aCurrentRoom.getImageName());
         }
     }
+    
+    private void addAMove(){
+        if(aNumberOfMove>aNumberOfMoveMax)
+            youLose();
+        ++aNumberOfMove;
+    }
 
     /** permet de retourner dans la room precedente
      * 
@@ -201,12 +210,19 @@ public class GameEngine
         if(aCurrentRoom.getImageName() != null)
             gui.showImage(aCurrentRoom.getImageName());
     }
+    /**
+     *  affiche le message de defaite
+     */
+    private void youLose(){
+        gui.println("You lost, you can trye again later.");
+        endGame();
+    }
+    
     
     /**
      * quit le jeux
      */
-    private void endGame()
-    {
+    private void endGame(){
         gui.println("Thank you for playing.  Good bye.");
         gui.enable(false);
     }
