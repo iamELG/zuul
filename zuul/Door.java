@@ -7,14 +7,20 @@
  */
 public class Door{
     private boolean aLocked;
+    private boolean aIsTrapDoor;
     private boolean aGoodDirection;
     
     /** constructeur naturel
      * 
      */
-    public Door(boolean pLocked,boolean pGoodDirection){
+    public Door(boolean pLocked,boolean pIsTrapDoor,boolean pGoodDirection){
         aGoodDirection=pGoodDirection;
+        aIsTrapDoor=pIsTrapDoor;
         aLocked=pLocked;
+    }
+    
+    public boolean isTrapDoor(){
+        return aIsTrapDoor;
     }
     
     public boolean isLocked(){

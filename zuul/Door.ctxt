@@ -1,15 +1,17 @@
 #BlueJ class context
 comment0.target=Door
 comment0.text=\n\ Write\ a\ description\ of\ class\ Door\ here.\n\n\ @author\ elvin\ guilloton\n\ @version\ 1.0\n
-comment1.params=pLocked\ pGoodDirection
-comment1.target=Door(boolean,\ boolean)
+comment1.params=pLocked\ pIsTrapDoor\ pGoodDirection
+comment1.target=Door(boolean,\ boolean,\ boolean)
 comment1.text=\ constructeur\ naturel\n\ \n
 comment2.params=
-comment2.target=boolean\ isLocked()
+comment2.target=boolean\ isTrapDoor()
 comment3.params=
-comment3.target=boolean\ canGo()
-comment4.params=pLocked
-comment4.target=void\ setLocked(boolean)
-comment5.params=pGoodDirection
-comment5.target=void\ setCanGo(boolean)
-numComments=6
+comment3.target=boolean\ isLocked()
+comment4.params=
+comment4.target=boolean\ canGo()
+comment5.params=pLocked
+comment5.target=void\ setLocked(boolean)
+comment6.params=pGoodDirection
+comment6.target=void\ setCanGo(boolean)
+numComments=7

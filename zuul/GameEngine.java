@@ -112,10 +112,10 @@ public class GameEngine
         
         
         //initialisation des door
-        Door tavern_emptyroom  = new Door(false,false);
-        Door emptyroom_tavern  = new Door(false,true);
-        Door treasureroom_crypt= new Door(true,true);
-        Door crypt_treasureroom= new Door(true,true);
+        Door tavern_emptyroom  = new Door(false,true,false);
+        Door emptyroom_tavern  = new Door(false,true,true);
+        Door treasureroom_crypt= new Door(true,false,true);
+        Door crypt_treasureroom= new Door(true,false,true);
         
         vTavern.setDoor("east",tavern_emptyroom);
         vEmptyRoom.setDoor("west",emptyroom_tavern);
@@ -194,12 +194,19 @@ public class GameEngine
             gui.println("There is no door!");
             return ;
         }
+        boolean pStack=true;
         if(aCurrentRoom.getDoor(vDirection)!=null){
-            if(!aCurrentRoom.getDoor(vDirection).canGo()){
-                gui.println("you can go through this door\nat least not in this direction!");
-                return;
+            if(aCurrentRoom.getDoor(vDirection).isTrapDoor()){
+                if(!aCurrentRoom.getDoor(vDirection).canGo()){
+                    gui.println("you can go through this door\nat least not in this direction!");
+                    return;
+                }
+                if(aCurrentRoom.getDoor(vDirection).canGo()){
+                    pStack=false;
+                    aStack.clear();
+                }            
             }
-            if(aCurrentRoom.getDoor(vDirection).isLocked()){
+            else if(aCurrentRoom.getDoor(vDirection).isLocked()){
                 if(!aPlayer.getInventory().itemInList("key"))
                     gui.println("this door is locked, but you open it with your key");
                 else{
@@ -208,7 +215,8 @@ public class GameEngine
                 }
             }
         }             
-        aStack.push(aCurrentRoom);
+        if(pStack)
+            aStack.push(aCurrentRoom);
         aCurrentRoom = nextRoom;
         gui.println(aCurrentRoom.getLongDescription());
         if(aCurrentRoom.getImageName() != null)
@@ -226,10 +234,8 @@ public class GameEngine
      * 
      */
     private void back(){
-        //ELG faire attention au door
         if(aStack.empty()){
-            gui.println("you are already at the beginning!");
-            gui.println("what did you expect? go back in time?");
+            gui.println("you can go back any further\n");
             return;
         }
         Room vRoom=aStack.pop();
