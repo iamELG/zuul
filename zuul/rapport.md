@@ -99,4 +99,9 @@ ajout d'une mimite de 35 mouvement valide pour finir le jeux
 ###EXO 7.42.2
  la décision de vous contenter de l'IHM actuelle.
  si j'arrive a ratraper mon retard peut etre que je ferai un nouvelle interfqce homme machine
+ 
+###EXO 7.43
+creation d'un treap door pour rentrer dans la taverne mais ne pas resortir.
+une locked door a ete fait en meme temps, entre le premier niveau de la crypte et le deuxieme il faut la "key" dans la "dead end"
+
 

@@ -110,6 +110,18 @@ public class GameEngine
         vDeadEnd.getItemList().addItem(new Item(5500,"heavy","realy heavy",false));
         vTavern.getItemList().addItem(new Item(20,"cookie","chocolate cookie",false));
         
+        
+        //initialisation des door
+        Door tavern_emptyroom  = new Door(false,false);
+        Door emptyroom_tavern  = new Door(false,true);
+        Door treasureroom_crypt= new Door(true,true);
+        Door crypt_treasureroom= new Door(true,true);
+        
+        vTavern.setDoor("east",tavern_emptyroom);
+        vEmptyRoom.setDoor("west",emptyroom_tavern);
+        vTreasureRoom.setDoor("down",treasureroom_crypt);
+        vCrypt.setDoor("up",crypt_treasureroom);
+                
         aCurrentRoom = vEntrance;  // start game outside
     }
 
@@ -178,15 +190,30 @@ public class GameEngine
         // Try to leave current room.
         Room nextRoom = aCurrentRoom.getExit(vDirection);
 
-        if (nextRoom == null)
+        if (nextRoom == null){
             gui.println("There is no door!");
-        else {
-            aStack.push(aCurrentRoom);
-            aCurrentRoom = nextRoom;
-            gui.println(aCurrentRoom.getLongDescription());
-            if(aCurrentRoom.getImageName() != null)
-                gui.showImage(aCurrentRoom.getImageName());
+            return ;
         }
+        if(aCurrentRoom.getDoor(vDirection)!=null){
+            if(!aCurrentRoom.getDoor(vDirection).canGo()){
+                gui.println("you can go through this door\nat least not in this direction!");
+                return;
+            }
+            if(aCurrentRoom.getDoor(vDirection).isLocked()){
+                if(!aPlayer.getInventory().itemInList("key"))
+                    gui.println("this door is locked, but you open it with your key");
+                else{
+                    gui.println("this door seems to be locked, you will need a key");
+                    return;
+                }
+            }
+        }             
+        aStack.push(aCurrentRoom);
+        aCurrentRoom = nextRoom;
+        gui.println(aCurrentRoom.getLongDescription());
+        if(aCurrentRoom.getImageName() != null)
+            gui.showImage(aCurrentRoom.getImageName());
+        
     }
     
     private void addAMove(){
@@ -199,6 +226,7 @@ public class GameEngine
      * 
      */
     private void back(){
+        //ELG faire attention au door
         if(aStack.empty()){
             gui.println("you are already at the beginning!");
             gui.println("what did you expect? go back in time?");
@@ -210,14 +238,14 @@ public class GameEngine
         if(aCurrentRoom.getImageName() != null)
             gui.showImage(aCurrentRoom.getImageName());
     }
+    
     /**
      *  affiche le message de defaite
      */
     private void youLose(){
         gui.println("You lost, you can trye again later.");
         endGame();
-    }
-    
+    }    
     
     /**
      * quit le jeux
@@ -280,6 +308,7 @@ public class GameEngine
             gui.println("no such file or directory:"+pCommand.getSecondWord());
         } // catch
     }//teste
+    
     /**
      *  take
      */
@@ -334,8 +363,7 @@ public class GameEngine
         if(aPlayer.getInventory().isEmpty()){
             gui.println("no Item in you bag");
             return;        
-        }
-            
+        }            
         gui.println("Inventory: "+ aPlayer.getInventory().getItemString());
         
     }

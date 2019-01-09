@@ -14,6 +14,7 @@ public class Room
 {
     private String aDescription;
     private HashMap<String,Room> aExits;
+    private HashMap<String,Door> aDoor;
     private String aImageName;
     private ItemList aItem;
 
@@ -25,6 +26,7 @@ public class Room
         this.aDescription=pDescription;
         this.aImageName=pImage;
         aExits=new HashMap<String, Room>();
+        aDoor=new HashMap<String, Door>();
         aItem=new ItemList(); 
         aItem.addItem(pItem);
     }//Room 
@@ -37,16 +39,24 @@ public class Room
         this.aDescription=pDescription;
         this.aImageName=pImage;
         aExits=new HashMap<String, Room>();
+        aDoor=new HashMap<String, Door>();
         aItem=new ItemList();
     }//Room 
     
     /** setExits cree les sortie dans l'atribut HashMap
      *
      */
-    public void setExits(String pDir,Room pNei){
-        aExits.put(pDir,pNei);
+    public void setExits(String pDir,Room pRoom){
+        aExits.put(pDir,pRoom);
     }//setExits
    
+    /** setExits ajout une Door HashMap
+     *
+     */
+    public void setDoor(String pDir,Door pDoor){
+        aDoor.put(pDir,pDoor);
+    }//setExits
+    
     /** accesseur
      * 
      */
@@ -61,6 +71,13 @@ public class Room
         return(aExits.get(direction));
     }//getExit
     
+    /** acceseur
+     *
+     */
+    public Door getDoor(String direction){
+        return(aDoor.get(direction));
+    }//getExit
+        
     /**geter
      * 
      */
