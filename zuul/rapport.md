@@ -103,5 +103,6 @@ ajout d'une mimite de 35 mouvement valide pour finir le jeux
 ###EXO 7.43
 creation d'un treap door pour rentrer dans la taverne mais ne pas resortir.
 une locked door a ete fait en meme temps, entre le premier niveau de la crypte et le deuxieme il faut la "key" dans la "dead end"
+la foncion back ne perme pas de repassr dans les trap door.
 
 

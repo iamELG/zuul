@@ -1,4 +1,12 @@
 #BlueJ class context
 comment0.target=Beamer
 comment0.text=\n\ Write\ a\ description\ of\ class\ Beamer\ here.\n\n\ @author\ Elvin\ Guilloton\n\ @version\ 1.0\n
-numComments=1
+comment1.params=
+comment1.target=Beamer()
+comment2.params=
+comment2.target=boolean\ isCharged()
+comment3.params=pRoom
+comment3.target=void\ charge(Room)
+comment4.params=
+comment4.target=Room\ fire()
+numComments=5

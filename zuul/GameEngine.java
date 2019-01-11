@@ -109,7 +109,7 @@ public class GameEngine
         vDeadEnd.getItemList().addItem(new Item(55,"key","an old and rusty key",false));
         vDeadEnd.getItemList().addItem(new Item(5500,"heavy","realy heavy",false));
         vTavern.getItemList().addItem(new Item(20,"cookie","chocolate cookie",false));
-        
+        vArmory.getItemList().addItem(new Beamer());
         
         //initialisation des door
         Door tavern_emptyroom  = new Door(false,true,false);
@@ -151,6 +151,8 @@ public class GameEngine
             case LOOK:look()          ; break;
             case BACK:back()          ; break;
             case ITEMS:items()        ; break;
+            case CHARGE:charge()      ; break;
+            case FIRE:fire()          ; break;
             case QUIT:endGame()       ; break;
         }
     }
@@ -370,7 +372,47 @@ public class GameEngine
             gui.println("no Item in you bag");
             return;        
         }            
-        gui.println("Inventory: "+ aPlayer.getInventory().getItemString());
+        gui.println("Inventory: "+ aPlayer.getInventory().getItemString());   
+    }
+    
+    /**
+     *  charge
+     */
+    private void charge(){
+        if(aPlayer.getInventory().itemInList("beamer")){
+            gui.println("you don't have any beamer, so you can't charge it");
+            return;
+        }
+        gui.println("you charged your beamer");
+        Item vItem=aPlayer.getInventory().getItem("beamer");
+        Beamer vBeamer=(Beamer)vItem;
         
+        vBeamer.charge(aCurrentRoom);
+    }
+    
+    /**
+     * fire
+     */
+    private void fire(){
+        if(aPlayer.getInventory().itemInList("beamer")){
+            gui.println("you don't have any beamer, so you can't fire it");
+            return;
+        }
+        //Room vRoom=aPlayer.getInventory().itemInList("beamer").get("beamer").fire();
+        
+        Item vItem=aPlayer.getInventory().getItem("beamer");
+        Beamer vBeamer=(Beamer)vItem;
+        if(!vBeamer.isCharged()){
+            gui.println("your beamer isn't charged, so you can't fire it");
+            return;
+        }
+        
+        aCurrentRoom = vBeamer.fire();
+        aStack.clear();
+        gui.println(aCurrentRoom.getLongDescription());
+        if(aCurrentRoom.getImageName() != null)
+            gui.showImage(aCurrentRoom.getImageName());
+        
+       
     }
 }

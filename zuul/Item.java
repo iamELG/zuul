@@ -5,8 +5,7 @@
  * @author Guilloton Elvin
  * @version 1.0
  */
-public class Item
-{
+public class Item{
     private int aWeight;
     private String aName;
     private String aDescription;
@@ -85,4 +84,5 @@ public class Item
     public String toString(){
         return("name:"+aName+"\ndescription:"+aDescription+"\nweight"+aWeight);
     }
+
 }
