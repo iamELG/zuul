@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=TransporterRoom
+comment0.text=\n\ Write\ a\ description\ of\ class\ TransporterRoom\ here.\n\n\ @author\ Elvin\ Guilloton\n\ @version\ v1.0\n
+comment1.params=pDescription\ pImage\ pListe
+comment1.target=TransporterRoom(java.lang.String,\ java.lang.String,\ java.util.ArrayList)
+comment2.params=pE
+comment2.target=Room\ getExit(java.lang.String)
+numComments=3

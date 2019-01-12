@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Stack;
+import java.util.ArrayList;
 /**
  * This class is part of "Beewick castle" application. 
  * "Beewick castle" is a very simple, text based adventure game.  
@@ -68,9 +69,24 @@ public class GameEngine
         Room vBedRoom=          new Room("bed room","./Images/royal_bed_room.JPG");
         Room vDiningRoom=       new Room("dining room","./Images/dining_room.jpg");
         Room vTreasureRoom=     new Room("treasure room","./Images/treasur_room.jpg");
-        Room vEntranceToTheMine=new Room("entrance to the mine","./Images/mine.jpg");
         Room vCrypt=            new Room("the crypt","./Images/treasur_room.jpg");
-      
+        
+        //add Rooms to list for transporterRoom
+        ArrayList<Room> vListe = new ArrayList<Room>(10);        
+        vListe.add(vEntrance);
+        vListe.add(vOutside);
+        vListe.add(vCoridor);
+        vListe.add(vDeadEnd);
+        vListe.add(vTavern);
+        vListe.add(vEmptyRoom);
+        vListe.add(vGuardRoom);
+        vListe.add(vArmory);
+        vListe.add(vThrone);
+        vListe.add(vBedRoom);
+        vListe.add(vDiningRoom);
+        vListe.add(vTreasureRoom);
+        Room vEntranceToTheMine=new TransporterRoom("entrance to the mine","./Images/mine.jpg",vListe);
+               
         // initialise room exits
         vEntrance.setExits("north",vOutside);
         vEntrance.setExits("south",vEmptyRoom);
@@ -106,10 +122,11 @@ public class GameEngine
         vEntrance.getItemList().addItem(new Item(110,"cube","a cube with some color on it",false));
         vDeadEnd.getItemList().addItem(new Item(20,"cape","a red cape",false));
         vDeadEnd.getItemList().addItem(new Item(35,"hat"," a cowboy hat",false));
-        vDeadEnd.getItemList().addItem(new Item(55,"key","an old and rusty key",false));
+        vDeadEnd.getItemList().addItem(new Item(30,"key","an old and rusty key",false));
         vDeadEnd.getItemList().addItem(new Item(5500,"heavy","realy heavy",false));
         vTavern.getItemList().addItem(new Item(20,"cookie","chocolate cookie",false));
         vArmory.getItemList().addItem(new Beamer());
+        vCrypt.getItemList().addItem(new Item(400,"treasure","the beewick treasure",false));
         
         //initialisation des door
         Door tavern_emptyroom  = new Door(false,true,false);
@@ -415,4 +432,5 @@ public class GameEngine
         
        
     }
+    
 }

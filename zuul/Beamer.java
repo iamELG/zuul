@@ -9,7 +9,7 @@ public class Beamer extends Item{
     public Room aRoom;
     
     public Beamer(){
-        super(70,"beamer","once you charge it, you can go back to the point where you charge it!!",false);        
+        super(80,"beamer","once you charge it, you can go back to the point where you charge it!!",false);        
     }
     
     public boolean isCharged(){

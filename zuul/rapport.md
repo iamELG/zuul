@@ -105,4 +105,6 @@ creation d'un treap door pour rentrer dans la taverne mais ne pas resortir.
 une locked door a ete fait en meme temps, entre le premier niveau de la crypte et le deuxieme il faut la "key" dans la "dead end"
 la foncion back ne perme pas de repassr dans les trap door.
 
+###EXO 7.43
+le beamer a ete cree, la commande back ne premet pas de refaire le mouvement de beamer dans l'autre sens.
 
