@@ -1,3 +1,5 @@
+import java.util.Stack;
+import java.util.Stack;
 /**
  * This class is part of "Beewick castle" application. 
  * "Beewick castle" is a very simple, text based adventure game.k
@@ -6,27 +8,58 @@
  */
 public class Player{
     private ItemList aInventory;
-    int aMaxWeight;
-    int aCurrentWeight;
+    private int aMaxWeight;
+    private int aCurrentWeight;
+    private int aNumberOfMove;
+    private int aNumberOfMoveMax;
+    private Room aCurrentRoom;
+    private Stack<Room> aStack;
     
     /**
      * natural constructor of the class Player
      * @param pMaxWeight the maximum weight the player can cary
      * @param pCurrentWeight the weight the player start at
+     * @param pNumberOfMoveMax the maximum number of valid move befor losing the game
+     * @param pNumberOfMove the number of move did since the begining of the game
      */
-    public Player(int pMaxWeight,int pCurrentWeight){
+    public Player(int pMaxWeight,int pCurrentWeight,int pNumberOfMoveMax,int pNumberOfMove){
         aInventory=new ItemList();
         aMaxWeight=pMaxWeight;
         aCurrentWeight=pCurrentWeight;
+        aNumberOfMoveMax=pNumberOfMoveMax;
+        aNumberOfMove=pNumberOfMove;
+        aStack = new Stack<Room>();
     }//Player
     
     /**
      * default constructor of the class Player
      * the player will have a maximum weight of 500 and a current weight of 0
+     * the player will have a number of move set at 0 and a maximum move of 35
      */
     public Player(){
-        this(500,0);
+        this(500,0,35,0);
     }//Player
+    
+    /**
+     * set the attribute aCurrentRoom 
+     */
+    public void setCurrentRoom(Room pCurrentRoom){
+        aCurrentRoom=pCurrentRoom;
+    }//setCurrentRoom
+    
+    /**
+     * get the attribute aCurrentRoom 
+     */
+    public Room getCurrentRoom(){
+        return aCurrentRoom;
+    }//getCurrentRoom
+    
+    /**
+     * get the attribute aStack 
+     */
+    public Stack<Room> getStack(){
+        return aStack;
+    }//getStack   
     
     /**
      * return the attribute aMaxWeight
@@ -43,6 +76,29 @@ public class Player{
     public int getCurrentWeight(){
         return aCurrentWeight;
     }//getCurrentWeight
+    
+    /**
+     * return the attribute aNumberOfMove
+     * @return aNumberOfMove 
+     */
+    public int getNumberOfMove(){
+        return aNumberOfMove;
+    }//getNumberOfMove
+    
+    /**
+     * return the attribute aNumberOfMoveMax
+     * @return aNumberOfMoveMax 
+     */
+    public int getNumberOfMoveMax(){
+        return aNumberOfMoveMax;
+    }//getNumberOfMoveMax
+    
+    /**
+     * add 1 to the attribute aNumberOfMove 
+     */
+    public void addNumberOfMove(){
+        ++aNumberOfMove;
+    }//addNumberOfMove
     
     /**
      * return the attribute ItemList aInventory

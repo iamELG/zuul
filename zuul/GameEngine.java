@@ -14,22 +14,15 @@ import java.util.ArrayList;
  */
 public class GameEngine{
     private Parser parser;
-    private Room aCurrentRoom;
     private UserInterface gui;
-    private Stack<Room> aStack;
     private Player aPlayer;
-    private int  aNumberOfMove;
-    private int  aNumberOfMoveMax;
 
     /**
      * natural constructor of the class GameEngine
      */
     public GameEngine(){
         parser = new Parser();
-        aStack = new Stack<Room>();
         aPlayer= new Player();
-        aNumberOfMove=0;
-        aNumberOfMove=35;
         createRooms();
     }//GameEngine
 
@@ -47,7 +40,7 @@ public class GameEngine{
     private void printWelcome(){
         gui.println("Welcome to Beewick castle!\n Beewick castle is a new, incredibly boring adventure game.\nType \'help\' if you need help.\n ");
         printLocationInfo();
-        gui.showImage(aCurrentRoom.getImageName());
+        gui.showImage(aPlayer.getCurrentRoom().getImageName());
     }//printWelcome
 
     /**
@@ -136,7 +129,7 @@ public class GameEngine{
         vEmptyRoom.setDoor("west",emptyroom_tavern);
         vTreasureRoom.setDoor("down",treasureroom_crypt);
                 
-        aCurrentRoom = vEntrance;  // start game outside
+        aPlayer.setCurrentRoom(vEntrance);  // start game outside
     }//createRooms
 
     /**
@@ -167,10 +160,20 @@ public class GameEngine{
             case FIRE:fire()          ; break;
             case QUIT:endGame()       ; break;
         }
+        
     }//interpretCommand
 
     // implementations of user commands:
-
+    /**
+     * win will look if you did exit the Beewick castle with the treasure
+     */
+    private void win(){
+        if((!aPlayer.getInventory().itemInList("treasure")) && aPlayer.getCurrentRoom().getDescription().equals("outside the main entrance")){
+            gui.println("\n\nYou won well done you escape Beewick castle with the treasure");
+            endGame();
+        }
+    }
+    
     /**
      * Print out some help information.
      * Here we print some stupid, cryptic message and a list of the 
@@ -185,7 +188,7 @@ public class GameEngine{
      *  print the descrition of the currentroom
      */
     private void printLocationInfo(){
-        gui.println(aCurrentRoom.getLongDescription());
+        gui.println(aPlayer.getCurrentRoom().getLongDescription());
     }//printLocationInfo
 
     /** 
@@ -193,6 +196,7 @@ public class GameEngine{
      * room, otherwise print an error message.
      */
     private void goRoom(Command pCommand){
+        gui.println("");
         if(!pCommand.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             gui.println("Go where?");
@@ -202,28 +206,28 @@ public class GameEngine{
         String vDirection = pCommand.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = aCurrentRoom.getExit(vDirection);
+        Room nextRoom = aPlayer.getCurrentRoom().getExit(vDirection);
 
         if (nextRoom == null){
             gui.println("There is no door!");
             return ;
         }
         boolean pStack=true;
-        if(aCurrentRoom.getDoor(vDirection)!=null){
-            if(aCurrentRoom.getDoor(vDirection).isTrapDoor()){
-                if(!aCurrentRoom.getDoor(vDirection).canGo()){
+        if(aPlayer.getCurrentRoom().getDoor(vDirection)!=null){
+            if(aPlayer.getCurrentRoom().getDoor(vDirection).isTrapDoor()){
+                if(!aPlayer.getCurrentRoom().getDoor(vDirection).canGo()){
                     gui.println("you can go through this door\nat least not in this direction!");
                     return;
                 }
-                if(aCurrentRoom.getDoor(vDirection).canGo()){
+                if(aPlayer.getCurrentRoom().getDoor(vDirection).canGo()){
                     pStack=false;
-                    aStack.clear();
+                    aPlayer.getStack().clear();
                 }            
             }
-            else if(aCurrentRoom.getDoor(vDirection).isLocked()){
+            else if(aPlayer.getCurrentRoom().getDoor(vDirection).isLocked()){
                 if(!aPlayer.getInventory().itemInList("key")){
                     gui.println("this door is locked, but you open it with your key");
-                    aCurrentRoom.getDoor(vDirection).setLocked(false);
+                    aPlayer.getCurrentRoom().getDoor(vDirection).setLocked(false);
                 }
                 else{
                     gui.println("this door seems to be locked, you will need a key");
@@ -232,39 +236,41 @@ public class GameEngine{
             }
         }             
         if(pStack)
-            aStack.push(aCurrentRoom);
-        aCurrentRoom = nextRoom;
-        gui.println(aCurrentRoom.getLongDescription());
-        if(aCurrentRoom.getImageName() != null)
-            gui.showImage(aCurrentRoom.getImageName());       
+            aPlayer.getStack().push(aPlayer.getCurrentRoom());
+        aPlayer.setCurrentRoom(nextRoom);
+        gui.println(aPlayer.getCurrentRoom().getLongDescription());
+        if(aPlayer.getCurrentRoom().getImageName() != null)
+            gui.showImage(aPlayer.getCurrentRoom().getImageName());   
+        win();
+        addAMove();
     }
     
     private void addAMove(){
-        if(aNumberOfMove>aNumberOfMoveMax)
+        if(aPlayer.getNumberOfMove()>aPlayer.getNumberOfMoveMax())
             youLose();
-        ++aNumberOfMove;
+        aPlayer.addNumberOfMove();
     }
 
     /** permet de retourner dans la room precedente
      * 
      */
     private void back(){
-        if(aStack.empty()){
+        if(aPlayer.getStack().empty()){
             gui.println("you can go back any further\n");
             return;
         }
-        Room vRoom=aStack.pop();
-        aCurrentRoom = vRoom;
-        gui.println(aCurrentRoom.getLongDescription());
-        if(aCurrentRoom.getImageName() != null)
-            gui.showImage(aCurrentRoom.getImageName());
+        Room vRoom=aPlayer.getStack().pop();
+        aPlayer.setCurrentRoom(vRoom);
+        gui.println(aPlayer.getCurrentRoom().getLongDescription());
+        if(aPlayer.getCurrentRoom().getImageName() != null)
+            gui.showImage(aPlayer.getCurrentRoom().getImageName());
     }
     
     /**
      *  affiche le message de defaite
      */
     private void youLose(){
-        gui.println("You lost, you can trye again later.");
+        gui.println("\nYou lost, you can trye again later.");
         endGame();
     }    
     
@@ -280,7 +286,7 @@ public class GameEngine{
      *
      */
     private void look(){
-        gui.println(aCurrentRoom.getLongDescription());
+        gui.println(aPlayer.getCurrentRoom().getLongDescription());
     }//look
     
     /**eat
@@ -340,20 +346,20 @@ public class GameEngine{
         }
         String vName = pCommand.getSecondWord();
         
-        if(aCurrentRoom.getItemList().itemInList(vName)){
+        if(aPlayer.getCurrentRoom().getItemList().itemInList(vName)){
             gui.println("this item is not in the room!");
             look();   
             return;
         }
         
-        if(aPlayer.getCurrentWeight()+aCurrentRoom.getItemList().getItem(vName).getWeight() > aPlayer.getMaxWeight()){
+        if(aPlayer.getCurrentWeight()+aPlayer.getCurrentRoom().getItemList().getItem(vName).getWeight() > aPlayer.getMaxWeight()){
             gui.println("this item is too heavy for you!");
             look();   
             return;
         }
-        aPlayer.setCurrentWeight( aPlayer.getCurrentWeight() + aCurrentRoom.getItemList().getItem(vName).getWeight() );
-        aPlayer.getInventory().addItem(aCurrentRoom.getItemList().getItem(vName));
-        aCurrentRoom.getItemList().removeItem(vName);
+        aPlayer.setCurrentWeight( aPlayer.getCurrentWeight() + aPlayer.getCurrentRoom().getItemList().getItem(vName).getWeight() );
+        aPlayer.getInventory().addItem(aPlayer.getCurrentRoom().getItemList().getItem(vName));
+        aPlayer.getCurrentRoom().getItemList().removeItem(vName);
         look();    
     }//take
     
@@ -372,7 +378,7 @@ public class GameEngine{
             return;
         }
         aPlayer.setCurrentWeight( aPlayer.getCurrentWeight() - aPlayer.getInventory().getItem(vName).getWeight());
-        aCurrentRoom.getItemList().addItem(aPlayer.getInventory().getItem(vName));
+        aPlayer.getCurrentRoom().getItemList().addItem(aPlayer.getInventory().getItem(vName));
         aPlayer.getInventory().removeItem(vName);
         look();
     }//drop
@@ -400,7 +406,7 @@ public class GameEngine{
         Item vItem=aPlayer.getInventory().getItem("beamer");
         Beamer vBeamer=(Beamer)vItem;
         
-        vBeamer.charge(aCurrentRoom);
+        vBeamer.charge(aPlayer.getCurrentRoom());
     }
     
     /**
@@ -420,11 +426,11 @@ public class GameEngine{
             return;
         }
         
-        aCurrentRoom = vBeamer.fire();
-        aStack.clear();
-        gui.println(aCurrentRoom.getLongDescription());
-        if(aCurrentRoom.getImageName() != null)
-            gui.showImage(aCurrentRoom.getImageName());
+        aPlayer.setCurrentRoom(vBeamer.fire());
+        aPlayer.getStack().clear();
+        gui.println(aPlayer.getCurrentRoom().getLongDescription());
+        if(aPlayer.getCurrentRoom().getImageName() != null)
+            gui.showImage(aPlayer.getCurrentRoom().getImageName());
         
        
     }

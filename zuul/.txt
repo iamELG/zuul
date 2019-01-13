@@ -6,3 +6,10 @@ go west
 go south
 go south
 go south
+go down 
+take treasure
+go up 
+go north
+go north
+go north
+go north
