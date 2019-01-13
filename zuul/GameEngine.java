@@ -10,10 +10,9 @@ import java.util.ArrayList;
  * This class is the main classe of the game "Beewick castle".
  *
  * @author  Michael Kolling and David J. Barnes + D.Bureau & Elvin Guilloton
- * @version 1.00
+ * @version 1.00 (Jan 2018)
  */
-public class GameEngine
-{
+public class GameEngine{
     private Parser parser;
     private Room aCurrentRoom;
     private UserInterface gui;
@@ -23,7 +22,7 @@ public class GameEngine
     private int  aNumberOfMoveMax;
 
     /**
-     * Constructor for objects of class GameEngine
+     * natural constructor of the class GameEngine
      */
     public GameEngine(){
         parser = new Parser();
@@ -32,18 +31,18 @@ public class GameEngine
         aNumberOfMove=0;
         aNumberOfMove=35;
         createRooms();
-    }
+    }//GameEngine
 
     /**
-     * fait un interface
+     * create a GUI and print a welcome message
      */
     public void setGUI(UserInterface userInterface){
         gui = userInterface;
         printWelcome();
-    }
+    }//setGUI
 
     /** 
-     *  affiche le message de debut
+     *  print a welcome message
      */
     private void printWelcome(){
         gui.println("Welcome to Beewick castle!\n Beewick castle is a new, incredibly boring adventure game.\nType \'help\' if you need help.\n ");
@@ -132,15 +131,13 @@ public class GameEngine
         Door tavern_emptyroom  = new Door(false,true,false);
         Door emptyroom_tavern  = new Door(false,true,true);
         Door treasureroom_crypt= new Door(true,false,true);
-        Door crypt_treasureroom= new Door(true,false,true);
         
         vTavern.setDoor("east",tavern_emptyroom);
         vEmptyRoom.setDoor("west",emptyroom_tavern);
         vTreasureRoom.setDoor("down",treasureroom_crypt);
-        vCrypt.setDoor("up",crypt_treasureroom);
                 
         aCurrentRoom = vEntrance;  // start game outside
-    }
+    }//createRooms
 
     /**
      * Given a command, process (that is: execute) the command.
@@ -150,14 +147,12 @@ public class GameEngine
     public void interpretCommand(Command pCommand){
         
         CommandWord vCommandWord = pCommand.getCommandWord();
-        //Command vCommand = parser.getCommand(commandLine);
         
         if(vCommandWord== CommandWord.UNKNOWN) {
             gui.println("I don't know what you mean...");
             return;
         }
         
-        //String vCommandSTR = vCommand.getCommandWord();
         switch(vCommandWord){
             case GO  :goRoom(pCommand); break;
             case EAT :eat(pCommand)   ; break;
@@ -172,7 +167,7 @@ public class GameEngine
             case FIRE:fire()          ; break;
             case QUIT:endGame()       ; break;
         }
-    }
+    }//interpretCommand
 
     // implementations of user commands:
 
@@ -186,8 +181,8 @@ public class GameEngine
         gui.println("Your command words are: " + parser.showCommands());
     }
 
-    /** printLocationInfo affiche la description de la piece
-     * 
+    /** 
+     *  print the descrition of the currentroom
      */
     private void printLocationInfo(){
         gui.println(aCurrentRoom.getLongDescription());
@@ -226,8 +221,10 @@ public class GameEngine
                 }            
             }
             else if(aCurrentRoom.getDoor(vDirection).isLocked()){
-                if(!aPlayer.getInventory().itemInList("key"))
+                if(!aPlayer.getInventory().itemInList("key")){
                     gui.println("this door is locked, but you open it with your key");
+                    aCurrentRoom.getDoor(vDirection).setLocked(false);
+                }
                 else{
                     gui.println("this door seems to be locked, you will need a key");
                     return;
@@ -239,8 +236,7 @@ public class GameEngine
         aCurrentRoom = nextRoom;
         gui.println(aCurrentRoom.getLongDescription());
         if(aCurrentRoom.getImageName() != null)
-            gui.showImage(aCurrentRoom.getImageName());
-        
+            gui.showImage(aCurrentRoom.getImageName());       
     }
     
     private void addAMove(){

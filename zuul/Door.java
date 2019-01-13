@@ -1,9 +1,10 @@
 
 /**
- * Write a description of class Door here.
- *
- * @author elvin guilloton
- * @version 1.0
+ * This class is part of "Beewick castle" application. 
+ * "Beewick castle" is a very simple, text based adventure game.
+ * this classe is to stop Player from mooving with some locked door/ trap door.
+ * @author Elvin Guilloton
+ * @version 1.0 (Jan 2018)
  */
 public class Door{
     private boolean aLocked;

@@ -1,7 +1,4 @@
 go south 
-go east
-go north
-take beamer
 go south
+go east
 go west
-go north

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Door
-comment0.text=\n\ Write\ a\ description\ of\ class\ Door\ here.\n\n\ @author\ elvin\ guilloton\n\ @version\ 1.0\n
+comment0.text=\n\ This\ class\ is\ part\ of\ "Beewick\ castle"\ application.\ \n\ "Beewick\ castle"\ is\ a\ very\ simple,\ text\ based\ adventure\ game.\n\ this\ classe\ is\ to\ stop\ Player\ from\ mooving\ with\ some\ locked\ door/\ trap\ door.\n\ @author\ Elvin\ Guilloton\n\ @version\ 1.0\ (Jan\ 2018)\n
 comment1.params=pLocked\ pIsTrapDoor\ pGoodDirection
 comment1.target=Door(boolean,\ boolean,\ boolean)
 comment1.text=\ constructeur\ naturel\n\ \n

@@ -1,19 +1,19 @@
 #BlueJ class context
 comment0.target=Command
-comment0.text=\n\ This\ class\ is\ part\ of\ "Beewick\ castle"\ application.\ \n\ "Beewick\ castle"\ is\ a\ very\ simple,\ text\ based\ adventure\ game.\ \ \n\ \n\ this\ class\ use\ the\ user\ inpute\ and\ do\ action\ in\ the\ game.\n\n\ @author\ \ Michael\ Kolling\ and\ David\ J.\ Barnes\ +\ D.Bureau\ &\ Elvin\ Guilloton\n\ @version\ 2008.03.30\ +\ 2013.09.15\n
+comment0.text=\n\ This\ class\ is\ part\ of\ "Beewick\ castle"\ application.\ \n\ "Beewick\ castle"\ is\ a\ very\ simple,\ text\ based\ adventure\ game.\ \ \n\ \n\ this\ class\ use\ the\ user\ inpute\ and\ do\ action\ in\ the\ game.\n\n\ @author\ \ Michael\ Kolling\ and\ David\ J.\ Barnes\ +\ D.Bureau\ &\ Elvin\ Guilloton\n\ @version\ (Jan\ 2018)\n
 comment1.params=pCommandWord\ pSecondWord
 comment1.target=Command(CommandWord,\ java.lang.String)
-comment1.text=\ constructeur\ naturel\ \n\ \n
+comment1.text=\n\ natural\ constructor\ of\ the\ class\ Command\n\ @param\ pCommandWord\ a\ Command\ word\n\ @param\ pSecondWord\ the\ second\ word\n
 comment2.params=
 comment2.target=CommandWord\ getCommandWord()
-comment2.text=\ accesseurs\ CommandWord\n\ \n
+comment2.text=\n\ return\ the\ attribute\ aCommandWord\n\ @return\ aCommandWord\ \n
 comment3.params=
 comment3.target=java.lang.String\ getSecondWord()
-comment3.text=\ accesseurs\ SecondWord\n\ \n
+comment3.text=\n\ return\ the\ attribute\ aSecondWord\n\ @return\ aSecondWord\ \n
 comment4.params=
 comment4.target=boolean\ hasSecondWord()
-comment4.text=\ renvoi\ si\ il\ y\ a\ un\ deuxiem\ mot\ \n\ \n
+comment4.text=\n\ return\ a\ boolean\ \n\ @return\ \ if\ there\ is\ a\ second\ word\n
 comment5.params=
 comment5.target=boolean\ isUnknown()
-comment5.text=\ verifi\ que\ la\ commande\ fait\ partie\ des\ commande\ connue\n\ \n
+comment5.text=\n\ return\ a\ boolean\n\ @return\ if\ the\ command\ is\ known\ \n
 numComments=6

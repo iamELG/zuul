@@ -8,85 +8,95 @@ import java.util.Set;
  * This class is to move move around the map in diferent room.
  * 
  * @author  Michael Kolling and David J. Barnes + D.Bureau & Elvin Guilloton
- * @version 2008.03.30 + 2013.09.15
+ * @version (Jan 2018)
  */
-public class Room
-{
+public class Room{
     private String aDescription;
     private HashMap<String,Room> aExits;
     private HashMap<String,Door> aDoor;
     private String aImageName;
     private ItemList aItem;
 
-    /** constructeur naturel
-     * 
+    /**
+     * natural constructor of the class Room
+     * @param pDescription description of the room
+     * @param pImage the destination to the image file of the room
+     * @param pItem a item that will be n the room
      */
-    public Room(final String pDescription, final String pImage,Item pItem)
-    {   
-        this.aDescription=pDescription;
-        this.aImageName=pImage;
-        aExits=new HashMap<String, Room>();
-        aDoor=new HashMap<String, Door>();
-        aItem=new ItemList(); 
-        aItem.addItem(pItem);
-    }//Room 
-    
-    /** constructeur sans objet
-     * 
-     */
-    public Room(final String pDescription, final String pImage)
-    {   
+    public Room(final String pDescription, final String pImage,Item pItem){   
         this.aDescription=pDescription;
         this.aImageName=pImage;
         aExits=new HashMap<String, Room>();
         aDoor=new HashMap<String, Door>();
         aItem=new ItemList();
+        if(pItem!=null)
+            aItem.addItem(pItem);
     }//Room 
     
-    /** setExits cree les sortie dans l'atribut HashMap
-     *
+    /**
+     * constructor of the class Room without any object
+     * @param pDescription description of the room
+     * @param pImage the destination to the image file of the room
+     */
+    public Room(final String pDescription, final String pImage){   
+        this(pDescription,pImage,null);
+    }//Room 
+    
+    /** 
+     * add an Exit to the HashMap aExits
+     * @param pDir the direction that lead to the next room
+     * @param pRoom the Room you want in the direction
      */
     public void setExits(String pDir,Room pRoom){
         aExits.put(pDir,pRoom);
     }//setExits
    
-    /** setExits ajout une Door HashMap
-     *
+    /** 
+     * add a Door to the HashMap aDoor
+     * @param pDir the direction  in wich the Door is 
+     * @param pDoor the Door you want in the direction
      */
     public void setDoor(String pDir,Door pDoor){
         aDoor.put(pDir,pDoor);
     }//setExits
     
-    /** accesseur
-     * 
+    /**
+     * return the attribute aDescription
+     * @return aDescription
      */
     public String getDescription(){
         return(this.aDescription);
     }//getDescription
     
-    /** acceseur
-     *
+    /**
+     * return a Room for the HashMap aExit
+     * @param pDirection the direction you want the Exit of. 
+     * @return the Room 
      */
-    public Room getExit(String direction){
-        return(aExits.get(direction));
+    public Room getExit(String pDirection){
+        return(aExits.get(pDirection));
     }//getExit
     
-    /** acceseur
-     *
+    /**
+     * return a Door for the HashMap aDoor
+     * @param pDirection the direction you want the Door of. 
+     * @return the Door 
      */
-    public Door getDoor(String direction){
-        return(aDoor.get(direction));
+    public Door getDoor(String pDirection){
+        return(aDoor.get(pDirection));
     }//getExit
         
-    /**geter
-     * 
+    /**
+     * return the attribute ItemList
+     * @return the attribute aItem
      */
     public ItemList getItemList(){
         return aItem;
-    }
+    }//getItemList
     
-    /** getExitString acceseur des sortie
-     *
+    /**
+     * return the String of all the Exits with a Space inbetween 
+     * @return String of all the Exits
      */
     private String getExitString()
     {
@@ -96,8 +106,9 @@ public class Room
         return vreturnString.toString();
     }//getExitString
     
-    /** return a lomg description of this room
-     *
+    /**
+     * return a String with the long description of the room
+     * @return a String with the description of the room
      */
     public String getLongDescription(){
         String vStr="You are in the: " + aDescription+".\n"+getExitString();
@@ -109,7 +120,8 @@ public class Room
     }//getLongDescription
 
     /**
-     * Return a string describing the room's image name
+     * return the name of the Image
+     * @return the String of a Image file
      */
     public String getImageName(){
         return aImageName;

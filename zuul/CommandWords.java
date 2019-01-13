@@ -7,15 +7,14 @@ import java.util.HashMap;
  * It is used to recognise commands as they are typed in.
  *
  * @author  Michael Kolling and David J. Barnes + D.Bureau & Elvin Guilloton
- * @version 2008.03.30 + 2013.09.15
+ * @version (Jan 2018)
  */
-public class CommandWords
-{
+public class CommandWords{
     // tableau constant qui contient tous les mots de commande valides
     private HashMap<String, CommandWord> validCommands;
 
     /**
-     * Constructeur par defaut
+     * default constructor of the class CommandWords
      */
     public CommandWords(){
         validCommands = new HashMap<String, CommandWord>();
@@ -32,10 +31,10 @@ public class CommandWords
      */
     public boolean isCommand(String aString){
         return validCommands.containsKey(aString);
-    }
+    }//isCommand
     
     /**
-     * return all valid commands
+     * @return all valid commands
      */
     public String getCommandList() {
         String vString="";
@@ -43,7 +42,7 @@ public class CommandWords
             vString+=command + "  ";
         }        
         return vString;
-    }
+    }//getCommandList
     
     /**
      * Find the CommandWord associated with a command word.
@@ -51,12 +50,11 @@ public class CommandWords
      * @return The CommandWord correspondng to commandWord, or UNKNOWN
      *         if it is not a valid command word.
      */
-    public CommandWord getCommandWord(String commandWord)
-    {
+    public CommandWord getCommandWord(String commandWord){
         CommandWord command = validCommands.get(commandWord);
         if(command != null) {
             return command;
         }
         return CommandWord.UNKNOWN;
-    }
+    }//getCommandWord
 } // CommandWords

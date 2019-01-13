@@ -5,7 +5,7 @@
  * This class is the main classe of the game "Beewick castle".
  *
  * @author  Michael Kolling and David J. Barnes + D.Bureau & Elvin Guilloton
- * @version 2.0 (Jan 2003)
+ * @version 2.0 (Jan 2018)
  */
 public class Game{
     private UserInterface gui;
@@ -18,5 +18,5 @@ public class Game{
         engine = new GameEngine();
         gui = new UserInterface(engine);
         engine.setGUI(gui);
-    }
+    }//Game
 } // Game

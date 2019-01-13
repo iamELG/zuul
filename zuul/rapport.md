@@ -1,5 +1,9 @@
 **Guilloton Elvin**
 
+Zuul est un projet d'informatique qui permet de commencer la programmation avec une approche différente des méthodes classiques. En effet, le projet Zuul est un façon ludique de commencer à programmer en faisant son propre jeu. Il permet de comprendre des concepts importants de la programmation orientée objet comme ce qu'est un object, une instance, des méthodes, etc. Il permet de manipuler des types tel que des int, boolean et String mais aussi des types un peu plus avancés comme des Stack, ArrayList, HashMap, etc.
+
+##Mon Projet Zuul
+
 Votre but: trouver le trésor dans le château de Beewick!
 
 Pour cela vous devrez entrer dans le chateau, trouver la salle du trésor puis prendre le trésor et sortir du chateau.
@@ -7,12 +11,11 @@ Bien évidemment, il y aura des obstacles sur votre chemin.
  
 La carte ainsi que la javadoc est disponible sur https://perso.esiee.fr/~guillote/
 
-Roger (le personnage que vous allez incarner) a dans sa besace des cookies.
-Roger ne connait pas le château. S'il fonce tête baissée, il ne trouvera probablement pas le trésor.
+Roger (le personnage que vous allez incarner) ne connait pas le château. S'il fonce tête baissée, il ne trouvera probablement pas le trésor.
 
 Condition de victoire: Roger sort du château en vie, avec le trésor.
 Condition de non défaite: Roger sort du château en vie.
-Condition de défaite: Roger meurt.
+Condition de défaite: Roger ne sort pas du chateau en 35 mouvements.
 
 ###EXO 7.11
 La fonction getLongDescription renvoie un String avec la description de la pièce et les sorties de cette pièce.
@@ -73,38 +76,31 @@ La class Player a directement été implémenté avec une Hashmap d'Item; donc i
 
 ###EXO 7.31.1
 Ajout de la class ItemList.
-----------------
+
 ###EXO 7.32
-les methode take et drop on ete modifier pour que les regle de poi soi respecter, currentweight < maxweight.
+Les méthodes take et drop ont été modifiées pour que les règles de poids soient respectées, currentZeight inférieur maxZeight.
 
 ###EXO 7.33
-ajout de la methode items pour voir sont inventaire 
+Ajout de la méthode items pour voir son inventaire. 
 
 ###EXO 7.34
-ajout d'un magic cookie dans le tavern.
+Ajout d'un magic cookie dans la taverne.
 
 ###EXO 7.35
-le classe CommandWord a ete cree et est fonctionel.
+La classe CommandWord a été créée et est fonctionelle.
 
-###EXO 7.41.2
-la java doc a ete mis a jour
-```bash
-javadoc -d userdoc -author -version *.java
-javadoc -d progdoc -author -version -private -linksource *.java
-```
 ###EXO 7.42
-ajout d'une mimite de 35 mouvement valide pour finir le jeux
-(7.42.1 optionel temps reel)
+Ajout d'une limite de 35 mouvements valides pour finir le jeu.
 
 ###EXO 7.42.2
- la décision de vous contenter de l'IHM actuelle.
- si j'arrive a ratraper mon retard peut etre que je ferai un nouvelle interfqce homme machine
+L'interface homme machine de départ me convient donc je ne l'ai pas changée.
  
 ###EXO 7.43
-creation d'un treap door pour rentrer dans la taverne mais ne pas resortir.
-une locked door a ete fait en meme temps, entre le premier niveau de la crypte et le deuxieme il faut la "key" dans la "dead end"
-la foncion back ne perme pas de repassr dans les trap door.
+Création d'un trap door pour rentrer dans la taverne sans pouvoir ressortir. La foncion back ne permet pas de repasser dans les trap door.
+Une locked door a été faite en même temps. Entre le premier niveau de la crypte et le deuxième, il faut la "key" dans la "dead end".
 
-###EXO 7.43
-le beamer a ete cree, la commande back ne premet pas de refaire le mouvement de beamer dans l'autre sens.
+###EXO 7.44
+Le beamer a été créé; la commande back ne permet pas de refaire le mouvement de beamer dans l'autre sens.
 
+###EXO 7.46
+Ajout de la class transporter room, la méthode getExit() a été @override.

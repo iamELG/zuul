@@ -20,7 +20,7 @@ import javax.swing.JButton;
  * area, a text output area and an optional image.
  * 
  * @author Michael Kolling (DB edited) & Elvin Guilloton
- * @version 1.0 (Jan 2003)
+ * @version 1.0 (Jan 2018)
  */
 public class UserInterface implements ActionListener{
     private GameEngine aEngine;
@@ -48,26 +48,23 @@ public class UserInterface implements ActionListener{
     /**
      * Print out some text into the text area.
      */
-    public void print( final String pText )
-    {
+    public void print( final String pText){
         //pas d'appelle a .toString()
         this.aLog.append( pText );
         this.aLog.setCaretPosition( this.aLog.getDocument().getLength() );
-    } // print(.)
+    } // print()
 
     /**
      * Print out some text into the text area, followed by a line break.
      */
-    public void println( final String pText )
-    {
+    public void println( final String pText ){
         this.print( pText + "\n" );
-    } // println(.)
+    } // println()
 
     /**
      * Show an image file in the interface.
      */
-    public void showImage( final String pImageName )
-    {
+    public void showImage( final String pImageName ){
         URL vImageURL = this.getClass().getClassLoader().getResource( pImageName );
         if ( vImageURL == null )
             System.out.println( "image not found" );
@@ -76,23 +73,21 @@ public class UserInterface implements ActionListener{
             this.aImage.setIcon( vIcon );
             this.aMyFrame.pack();
         }
-    } // showImage(.)
+    } // showImage()
 
     /**
      * Enable or disable input in the input field.
      */
-    public void enable( final boolean pOnOff )
-    {
+    public void enable( final boolean pOnOff ){
         this.aEntryField.setEditable( pOnOff );
         if ( ! pOnOff )
             this.aEntryField.getCaret().setBlinkRate( 0 );
-    } // enable(.)
+    } // enable()
 
     /**
      * Set up graphical user interface.
      */
-    private void createGUI()
-    {
+    private void createGUI(){
         this.aMyFrame = new JFrame( "Beewick" );
         this.aEntryField = new JTextField( 34 );
         
@@ -132,22 +127,20 @@ public class UserInterface implements ActionListener{
     /**
      * Actionlistener interface for entry textfield.
      */
-    public void actionPerformed( final ActionEvent pE ) 
-    {
+    public void actionPerformed( final ActionEvent pE ) {
         Object vSource=pE.getSource();
         if(vSource==aButton){
             aParser.getCommand("look");
             return;
         }
         this.processCommand();
-    } // actionPerformed(.)
+    } // actionPerformed()
 
     /**
      * A command has been entered. Read the command and do whatever is 
      * necessary to process it.
      */
-    private void processCommand()
-    {
+    private void processCommand(){
         String vInput = this.aEntryField.getText();
         this.aEntryField.setText( "" );
 
