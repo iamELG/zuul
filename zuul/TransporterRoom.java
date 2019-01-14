@@ -29,4 +29,13 @@ public class TransporterRoom extends Room{
         int vI=(int)(Math.random()*aListe.size());
         return aListe.get(vI);        
     }//getExit
+    
+    /**
+     * return a random room
+     * @param pI a int for a sudo random methode 
+     * @return a sudo random room
+     */
+    public Room alea(int pI){
+        return aListe.get(pI);        
+    }//getExit
 }//TransporterRoom

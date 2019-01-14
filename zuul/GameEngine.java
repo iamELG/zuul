@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Stack;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 /**
  * This class is part of "Beewick castle" application. 
  * "Beewick castle" is a very simple, text based adventure game.  
@@ -64,7 +65,7 @@ public class GameEngine{
         Room vCrypt=            new Room("the crypt","./Images/treasur_room.jpg");
         
         //add Rooms to list for transporterRoom
-        ArrayList<Room> vListe = new ArrayList<Room>(10);        
+        ArrayList<Room> vListe = new ArrayList<Room>(9);        
         vListe.add(vEntrance);
         vListe.add(vOutside);
         vListe.add(vCoridor);
@@ -76,7 +77,6 @@ public class GameEngine{
         vListe.add(vThrone);
         vListe.add(vBedRoom);
         vListe.add(vDiningRoom);
-        vListe.add(vTreasureRoom);
         Room vEntranceToTheMine=new TransporterRoom("entrance to the mine","./Images/mine.jpg",vListe);
                
         // initialise room exits
@@ -137,30 +137,30 @@ public class GameEngine{
      * If this command ends the game, true is returned, otherwise false is
      * returned.
      */
-    public void interpretCommand(Command pCommand){
+    public boolean interpretCommand(Command pCommand){
         
         CommandWord vCommandWord = pCommand.getCommandWord();
         
         if(vCommandWord== CommandWord.UNKNOWN) {
             gui.println("I don't know what you mean...");
-            return;
+            return false;
         }
         
         switch(vCommandWord){
-            case GO  :goRoom(pCommand); break;
-            case EAT :eat(pCommand)   ; break;
-            case TEST:test(pCommand)  ; break;
-            case TAKE:take(pCommand)  ; break;
-            case DROP:drop(pCommand)  ; break;
-            case HELP:printHelp()     ; break;
-            case LOOK:look()          ; break;
-            case BACK:back()          ; break;
-            case ITEMS:items()        ; break;
-            case CHARGE:charge()      ; break;
-            case FIRE:fire()          ; break;
-            case QUIT:endGame()       ; break;
+            case GO  :goRoom(pCommand); return true;
+            case EAT :eat(pCommand)   ; return true;
+            case TEST:test(pCommand)  ; return true;
+            case TAKE:take(pCommand)  ; return true;
+            case DROP:drop(pCommand)  ; return true;
+            case HELP:printHelp()     ; return true;
+            case LOOK:look()          ; return true;
+            case BACK:back()          ; return true;
+            case ITEMS:items()        ; return true;
+            case CHARGE:charge()      ; return true;
+            case FIRE:fire()          ; return true;
+            case QUIT:endGame()       ; return true;
         }
-        
+        return false;       
     }//interpretCommand
 
     // implementations of user commands:
@@ -327,7 +327,32 @@ public class GameEngine{
             vSc = new Scanner( new File( pNomFichier ) );
             while ( vSc.hasNextLine() ) {
                 String vLigne = vSc.nextLine();
-                interpretCommand(parser.getCommand( vLigne ));
+            
+                String vWord1;
+                String vWord2;
+        
+                StringTokenizer tokenizer = new StringTokenizer( vLigne );
+        
+                if ( tokenizer.hasMoreTokens() )
+                    vWord1 = tokenizer.nextToken();      // get first word
+                else
+                    vWord1 = null;
+                if ( tokenizer.hasMoreTokens() )
+                    vWord2 = tokenizer.nextToken();      // get second word
+                else
+                    vWord2 = null;
+                        
+                    
+                if((!vWord1.equals("test"))&&!(interpretCommand(parser.getCommand( vLigne)))){
+                    if(vWord1.equals("alea")&& aPlayer.getCurrentRoom().getDescription().equals("entrance to the mine") && vWord2 != null){
+                        aPlayer.setCurrentRoom(aPlayer.getCurrentRoom().alea(Integer.valueOf(vWord2)));
+                        aPlayer.getStack().clear();
+                        gui.println(aPlayer.getCurrentRoom().getLongDescription());
+                        if(aPlayer.getCurrentRoom().getImageName() != null)
+                            gui.showImage(aPlayer.getCurrentRoom().getImageName());   
+
+                    }                            
+                }
                 // traitement de la ligne lue
             } // while
         } // try
@@ -335,6 +360,7 @@ public class GameEngine{
             gui.println("no such file or directory:"+pCommand.getSecondWord());
         } // catch
     }//teste
+    
     
     /**
      *  take

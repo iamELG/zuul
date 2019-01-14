@@ -127,4 +127,7 @@ public class Room{
         return aImageName;
     }//getImageName
     
+    public Room alea(int pI){
+        return null;
+    }  
 } // Room

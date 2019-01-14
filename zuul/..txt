@@ -1,4 +1,4 @@
-go south 
+go south
 go south
 go east
-go west
+alea 3

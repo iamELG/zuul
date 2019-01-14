@@ -19,4 +19,8 @@ public class Game{
         gui = new UserInterface(engine);
         engine.setGUI(gui);
     }//Game
+    
+    public static void main(String [] args){
+        new Game();
+    }
 } // Game
