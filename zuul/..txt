@@ -1,4 +1,0 @@
-go south
-go south
-go east
-alea 3

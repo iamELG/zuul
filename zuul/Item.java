@@ -3,7 +3,7 @@
  * Décrivez votre classe Item ici.
  *
  * @author Guilloton Elvin
- * @version 1.0
+ * @version 1.0 (Jan 2018)
  */
 public class Item{
     private int aWeight;
@@ -12,7 +12,7 @@ public class Item{
     private boolean aEdible;
     
     /**
-     * Constructeur d'objets de classe Item
+     * natural constructor of the class Item
      */
     public Item(int pWeight,String pName,String pDescription,boolean pEdible){
          aDescription=pDescription;
@@ -22,67 +22,59 @@ public class Item{
     }//Item
 
     /**
-     * Constructeur d'objets de classe Item
+     * default constructor of the class Item
      */
     public Item(int pWeight,String pDescription){
         this(pWeight,pDescription,pDescription,false);
     }//Item
     
     /**
-     * geter
+     * @return the attribute aWeight
      */
     public int getWeight(){
         return(this.aWeight);
-    }
+    }//getWeight
     
     /**
-     * geter
+     * @return the attribute aDescription
      */
     public String getDescription(){
         return(this.aDescription);
-    }
+    }//getDescription
     
     /**
-     * geter
+     * @return the attribute aName
      */
     public String getName(){
         return(this.aName);
-    }
+    }//getName
     
     /**
-     * geter
+     * @return the attribute aEdible
      */
     public boolean getEdible(){
         return(this.aEdible);
-    }
+    }//getEdible
     
     /**
-     * seter
+     * set the attribut aWeight
      */    
     public void setWeight(int pWeight){
-        this.aWeight=pWeight;
-    }
+        aWeight=pWeight;
+    }//setWeight
     
     /**
-     * seter
+     * set the attribut aDescription
      */
     public void setDescription(String pDescription){
         aDescription=pDescription;
-    }
+    }//setDescription
 
     /**
-     * seter
+     * set the attribut aName
      */
     public void setName(String pName){
         aName=pName;
-    }
+    }//setName
     
-    /**
-     * fonction qui renvoi la descricption d'un Item et le poids
-     */
-    @Override
-    public String toString(){
-        return("name:"+aName+"\ndescription:"+aDescription+"\nweight"+aWeight);
-    }
-
 }

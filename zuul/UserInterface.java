@@ -130,7 +130,7 @@ public class UserInterface implements ActionListener{
     public void actionPerformed( final ActionEvent pE ) {
         Object vSource=pE.getSource();
         if(vSource==aButton){
-            aParser.getCommand("look");
+            aEngine.interpretCommand(aParser.getCommand("look"));
             return;
         }
         this.processCommand();

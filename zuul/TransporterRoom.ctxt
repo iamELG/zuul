@@ -10,4 +10,6 @@ comment2.text=\n\ return\ a\ random\ room\n\ @param\ pE\ a\ String\ that\ is\ un
 comment3.params=pI
 comment3.target=Room\ alea(int)
 comment3.text=\n\ return\ a\ random\ room\n\ @param\ pI\ a\ int\ for\ a\ sudo\ random\ methode\ \n\ @return\ a\ sudo\ random\ room\n
-numComments=4
+comment4.params=
+comment4.target=boolean\ isTransportRoom()
+numComments=5

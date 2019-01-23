@@ -17,6 +17,23 @@ Condition de victoire: Roger sort du château en vie, avec le trésor.
 Condition de non défaite: Roger sort du château en vie.
 Condition de défaite: Roger ne sort pas du chateau en 35 mouvements.
 
+
+####Comment gagner:
+Il faut aller dans la pièce dead end pour prendre la clef.
+Ensuite il faut aller à la salle du trésor et décendre dans la crypte(qui n'est pas verouillée car vous avez la clef);prendre le trésor et ressortir.
+
+####Room:
+La taverne est un pièce particulière; la taverne a la sortie west et sud qui reviennent dans la taverne. La sortie east est une "trap door", c'est à dire que depuis la "empty room" on peut aller vers l'ouest vers la "tavern" mais depuis la taverne on ne peut pas ressortir vers "empty room". Le seul moyen de ressortir est d'aller vers le nord pour retomber dans la "main entrance". 
+"The entrance of the mine" est un "transporter room"; c'est à dire que si vous en ressortez vous allez atterrir à un endroit aléatoire.
+Entre la "treasure room" et la "Crypt" il y a une "locked door".
+
+####Item:
+ Dans la "main entrance" se trouve un "cube" inutile.
+      Dans "l'armoury" se trouve un "beamer". Il pourrait vous être utile.
+      Dans la "deadend" se trouve une "cape" un "hat", un "key" and a "heavy item" seul le "key" est un item utile.
+      Dans la taverne, il y a un "magic cookie" qui double la capacité que le personage peut porter. 
+      Dans la "crypte", il y a un trésor qui est nécessaire pour gagner.
+      
 ###EXO 7.11
 La fonction getLongDescription renvoie un String avec la description de la pièce et les sorties de cette pièce.
 
@@ -103,4 +120,4 @@ Une locked door a été faite en même temps. Entre le premier niveau de la cryp
 Le beamer a été créé; la commande back ne permet pas de refaire le mouvement de beamer dans l'autre sens.
 
 ###EXO 7.46
-Ajout de la class transporter room, la méthode getExit() a été @override.
+Ajout de la class transporter room, la méthode getExit() a été @override. La commande alea a été ajouter, elle n'est utilisable aue par un fichier .txt .

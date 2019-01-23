@@ -3,13 +3,13 @@ import java.util.HashMap;
  * Write a description of class ItemList here.
  *
  * @author Elvin Guilloton
- * @version 1.0
+ * @version 1.0 (Jan 2018)
  */
 public class ItemList{
     private HashMap<String,Item> aList;
     
     /**
-     * constructeur naturel
+     * natural constructor of the class Player
      */
     public ItemList(Item pItem){
         aList=new HashMap<String,Item>();
@@ -17,28 +17,28 @@ public class ItemList{
     }
        
     /**
-     * constructeur par default
+     * default constructor of the class Player
      */
     public ItemList(){
         aList=new HashMap<String,Item>();
     }
     
-    /** accesseur
-     * 
+    /** 
+     * return an item of the aList
      */
     public Item getItem(String pName){
         return(aList.get(pName));
     }
     
     /**  
-     * addItem ajoute un item dans la hashmap
+     * addItem add an item to the HashMap
      */
     public void addItem(Item pItem){
        aList.put(pItem.getName(),pItem);
     }//addItem
     
     /**  
-     * removeItem enleve un item dans la hashmap
+     * removeItem remove an item to the HashMap
      */
     public void removeItem(String pStr){
         if(!aList.containsKey(pStr))
@@ -47,7 +47,7 @@ public class ItemList{
     }//removeItem
     
     /**  
-     * itemInInventory renvoi si un item est dans l'inventair
+     * return if the item is in the liste
      */
     public boolean itemInList(String pStr){
         if(aList.containsKey(pStr))
@@ -56,7 +56,7 @@ public class ItemList{
     }//itemInListe    
     
     /**
-     * renvoi une String avec tout les Item d'une de l'ItemList
+     * renvoi a String with all the item in the HashMap
      */
     public String getItemString(){
         StringBuilder vreturnString = new StringBuilder( "" );
@@ -67,7 +67,7 @@ public class ItemList{
     }//getItemString
     
     /**
-     * renvoi si il y  au moin un Item dans l'ItemList
+     * return if theyr is at least one item in the hashMap
      */
     public boolean isEmpty(){
         return (aList.isEmpty());

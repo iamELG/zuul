@@ -130,4 +130,8 @@ public class Room{
     public Room alea(int pI){
         return null;
     }  
+    
+    public boolean isTransportRoom(){
+        return false;
+    }
 } // Room

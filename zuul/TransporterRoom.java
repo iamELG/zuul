@@ -35,7 +35,13 @@ public class TransporterRoom extends Room{
      * @param pI a int for a sudo random methode 
      * @return a sudo random room
      */
+    @Override
     public Room alea(int pI){
         return aListe.get(pI);        
     }//getExit
+    
+    @Override
+    public boolean isTransportRoom(){
+        return true;
+    }
 }//TransporterRoom

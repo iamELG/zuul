@@ -1,6 +1,5 @@
 go east
 go west 
-eat 
 look
 go north
-quit
+back

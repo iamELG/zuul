@@ -87,7 +87,7 @@ public class GameEngine{
         vCoridor.setExits("east",vDeadEnd);
         vCoridor.setExits("west",vEntrance);
         vDeadEnd.setExits("west",vCoridor);
-        vTavern.setExits("north",vTavern);
+        vTavern.setExits("north",vEntrance);
         vTavern.setExits("south",vTavern);
         vTavern.setExits("east",vEmptyRoom);
         vTavern.setExits("west",vTavern);
@@ -172,7 +172,7 @@ public class GameEngine{
             gui.println("\n\nYou won well done you escape Beewick castle with the treasure");
             endGame();
         }
-    }
+    }//win
     
     /**
      * Print out some help information.
@@ -182,7 +182,7 @@ public class GameEngine{
     private void printHelp() {
         gui.println("You are lost in Beewick castle?\nYou are alone. You wander");
         gui.println("Your command words are: " + parser.showCommands());
-    }
+    }//printHelp
 
     /** 
      *  print the descrition of the currentroom
@@ -237,22 +237,29 @@ public class GameEngine{
         }             
         if(pStack)
             aPlayer.getStack().push(aPlayer.getCurrentRoom());
+            
+        if(aPlayer.getCurrentRoom().isTransportRoom())
+            aPlayer.getStack().clear();
+            
         aPlayer.setCurrentRoom(nextRoom);
         gui.println(aPlayer.getCurrentRoom().getLongDescription());
         if(aPlayer.getCurrentRoom().getImageName() != null)
             gui.showImage(aPlayer.getCurrentRoom().getImageName());   
         win();
         addAMove();
-    }
+    }//goRoom
     
+    /**
+     * this methode verify that the player haven't made more than the limit number of move
+     */
     private void addAMove(){
         if(aPlayer.getNumberOfMove()>aPlayer.getNumberOfMoveMax())
             youLose();
         aPlayer.addNumberOfMove();
-    }
+    }//addAMove
 
-    /** permet de retourner dans la room precedente
-     * 
+    /** 
+     * let you do the last move you did backward 
      */
     private void back(){
         if(aPlayer.getStack().empty()){
@@ -267,30 +274,30 @@ public class GameEngine{
     }
     
     /**
-     *  affiche le message de defaite
+     *  print a th defeat message
      */
     private void youLose(){
         gui.println("\nYou lost, you can trye again later.");
         endGame();
-    }    
+    }//back    
     
     /**
-     * quit le jeux
+     * quit the game
      */
     private void endGame(){
         gui.println("Thank you for playing.  Good bye.");
         gui.enable(false);
-    }
+    }//endGame
     
-    /**look
-     *
+    /**
+     * print the current rom descriction
      */
     private void look(){
         gui.println(aPlayer.getCurrentRoom().getLongDescription());
     }//look
     
-    /**eat
-     *
+    /**
+     * eat let you item edible item, edible item double you maximum weight you can carry
      */
     private void eat(Command pCommand){
         if(!pCommand.hasSecondWord()){
@@ -312,9 +319,9 @@ public class GameEngine{
         gui.println("you ate a cookie, you can now carry more loot");
     }//eat
 
-    /**test
-     * 
-     * 
+    /**test this comand let you meke test easyli by reading command from a .txt file
+     * the command test can't use the command test (otherwise infinit loop)
+     * the command test can use the command alea to do a sudo random move from a transporterroom
      */
     private void test(Command pCommand){
         if(!pCommand.hasSecondWord()){
@@ -363,7 +370,7 @@ public class GameEngine{
     
     
     /**
-     *  take
+     *  take an item put it from the room to the player inventory
      */
     private void take(Command pCommand){
         if(!pCommand.hasSecondWord()) {
@@ -390,7 +397,7 @@ public class GameEngine{
     }//take
     
     /**
-     *  drop
+     *  drop an item n the room form the player inventory
      */
     private void drop(Command pCommand){
         if(!pCommand.hasSecondWord()) {
@@ -410,7 +417,7 @@ public class GameEngine{
     }//drop
     
     /**
-     * items
+     * show all item the player carry in his enventori
      */
     private void items(){
         if(aPlayer.getInventory().isEmpty()){
@@ -418,10 +425,10 @@ public class GameEngine{
             return;        
         }            
         gui.println("Inventory: "+ aPlayer.getInventory().getItemString());   
-    }
+    }//items
     
     /**
-     *  charge
+     * charge the beamer, the player can fire it lat to go back toot the room the beamer was charged in
      */
     private void charge(){
         if(aPlayer.getInventory().itemInList("beamer")){
@@ -433,10 +440,10 @@ public class GameEngine{
         Beamer vBeamer=(Beamer)vItem;
         
         vBeamer.charge(aPlayer.getCurrentRoom());
-    }
+    }//charge
     
     /**
-     * fire
+     * fire the beamer and move the player to the room the beamer was charged in
      */
     private void fire(){
         if(aPlayer.getInventory().itemInList("beamer")){
@@ -459,6 +466,5 @@ public class GameEngine{
             gui.showImage(aPlayer.getCurrentRoom().getImageName());
         
        
-    }
-    
-}
+    }//fire
+}//GameEngine
